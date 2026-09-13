@@ -1,0 +1,446 @@
+<div class="admin-students-page">
+
+  <!-- HEADER -->
+
+  <div class="page-header">
+
+    <div>
+
+      <a routerLink="/admin" class="back-link">
+        ← Back to Dashboard
+      </a>
+
+      <span class="eyebrow">
+        ADMIN PANEL
+      </span>
+
+      <h1>
+        Manage Students
+      </h1>
+
+      <p>
+        View registered students and their learning progress.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOOLBAR -->
+
+  <div class="students-toolbar">
+
+    <div class="student-count">
+      <strong>{{ students().length }}</strong>
+      students registered
+    </div>
+
+    <div class="search-box">
+
+      <span>🔎</span>
+
+      <input
+        type="text"
+        placeholder="Search student..."
+        [(ngModel)]="searchText"
+      >
+
+    </div>
+
+  </div>
+
+
+  <!-- LOADING -->
+
+  @if (loading()) {
+
+    <div class="loading">
+
+      <div class="spinner"></div>
+
+      <p>
+        Loading students...
+      </p>
+
+    </div>
+
+  } @else {
+
+
+    <!-- STUDENTS TABLE -->
+
+    <div class="students-table">
+
+      <div class="table-header">
+
+        <span>STUDENT</span>
+        <span>EMAIL</span>
+        <span>ROLE</span>
+        <span>JOINED</span>
+        <span>ACTION</span>
+
+      </div>
+
+
+      @for (student of filteredStudents; track student.id) {
+
+        <div class="student-row">
+
+          <!-- STUDENT -->
+
+          <div class="student-info">
+
+            <div class="student-avatar">
+              {{ (student.full_name || 'S').charAt(0).toUpperCase() }}
+            </div>
+
+            <div>
+
+              <h3>
+                {{ student.full_name || 'Unknown Student' }}
+              </h3>
+
+              <small>
+                Student ID: {{ student.id }}
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="student-email">
+
+            {{ student.email }}
+
+          </div>
+
+
+          <!-- ROLE -->
+
+          <div>
+
+            <span
+              class="role-badge"
+              [class.admin]="student.role === 'admin'"
+            >
+              {{ student.role || 'student' }}
+            </span>
+
+          </div>
+
+
+          <!-- JOINED -->
+
+          <div class="joined-date">
+
+            {{ formatDate(student.created_at) }}
+
+          </div>
+
+
+          <!-- ACTION -->
+
+          <div class="student-action">
+
+            <button
+              type="button"
+              class="view-btn"
+              (click)="viewStudent(student)"
+            >
+              View
+            </button>
+
+          </div>
+
+        </div>
+
+      }
+
+
+      <!-- NO STUDENTS -->
+
+      @if (filteredStudents.length === 0) {
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            👨‍🎓
+          </div>
+
+          <h2>
+            No Students Found
+          </h2>
+
+          <p>
+            No student matches your search.
+          </p>
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+
+  <!-- =====================================
+       STUDENT DETAILS MODAL
+  ====================================== -->
+
+  @if (showDetails()) {
+
+    <div
+      class="student-modal-overlay"
+      (click)="closeDetails()"
+    >
+
+      <div
+        class="student-modal"
+        (click)="$event.stopPropagation()"
+      >
+
+
+        <!-- MODAL HEADER -->
+
+        <div class="student-modal-header">
+
+          <div>
+
+            <span class="modal-eyebrow">
+              STUDENT PROFILE
+            </span>
+
+            <h2>
+              Student Details
+            </h2>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="modal-close-btn"
+            (click)="closeDetails()"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <!-- MODAL BODY -->
+
+        <div class="student-modal-body">
+
+          @if (selectedStudent()) {
+
+            <!-- PROFILE -->
+
+            <div class="profile-card">
+
+              <div class="profile-avatar">
+
+                {{ 
+                  (selectedStudent().full_name || 'S')
+                    .charAt(0)
+                    .toUpperCase()
+                }}
+
+              </div>
+
+
+              <div class="profile-info">
+
+                <h3>
+                  {{ selectedStudent().full_name || 'Unknown Student' }}
+                </h3>
+
+                <p>
+                  {{ selectedStudent().email }}
+                </p>
+
+                <span
+                  class="role-badge"
+                  [class.admin]="selectedStudent().role === 'admin'"
+                >
+                  {{ selectedStudent().role || 'student' }}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- BASIC INFO -->
+
+            <div class="details-grid">
+
+              <div class="detail-box">
+
+                <span>
+                  EMAIL
+                </span>
+
+                <strong>
+                  {{ selectedStudent().email }}
+                </strong>
+
+              </div>
+
+
+              <div class="detail-box">
+
+                <span>
+                  JOINED
+                </span>
+
+                <strong>
+                  {{ formatDate(selectedStudent().created_at) }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <!-- COURSE PROGRESS -->
+
+            <div class="progress-section">
+
+              <div class="section-heading">
+
+                <div>
+
+                  <span>
+                    LEARNING
+                  </span>
+
+                  <h3>
+                    Course Progress
+                  </h3>
+
+                </div>
+
+              </div>
+
+
+              @if (detailsLoading()) {
+
+                <div class="progress-loading">
+
+                  <div class="small-spinner"></div>
+
+                  <p>
+                    Loading progress...
+                  </p>
+
+                </div>
+
+              } @else {
+
+
+                @if (studentProgress().length > 0) {
+
+                  <div class="progress-list">
+
+                    @for (
+                      progress of studentProgress();
+                      track progress.courseName
+                    ) {
+
+                      <div class="progress-card">
+
+                        <div class="progress-top">
+
+                          <div>
+
+                            <h4>
+                              {{ progress.courseName }}
+                            </h4>
+
+                            <p>
+                              {{ progress.completedLessons }}
+                              / {{ progress.totalLessons }}
+                              lessons completed
+                            </p>
+
+                          </div>
+
+
+                          <strong>
+                            {{ formatProgress(progress.percentage) }}%
+                          </strong>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                          <div
+                            class="progress-fill"
+                            [style.width.%]="progress.percentage"
+                          ></div>
+
+                        </div>
+
+                      </div>
+
+                    }
+
+                  </div>
+
+                } @else {
+
+                  <div class="no-progress">
+
+                    <div>
+                      📚
+                    </div>
+
+                    <h4>
+                      No Learning Progress
+                    </h4>
+
+                    <p>
+                      This student has not started any course yet.
+                    </p>
+
+                  </div>
+
+                }
+
+              }
+
+            </div>
+
+          }
+
+        </div>
+
+
+        <!-- MODAL FOOTER -->
+
+        <div class="student-modal-footer">
+
+          <button
+            type="button"
+            class="modal-done-btn"
+            (click)="closeDetails()"
+          >
+            Close
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

@@ -1,84 +1,96 @@
 <div class="certificates-page">
 
-  <!-- HERO -->
+  <!-- =========================================
+       HERO
+  ========================================== -->
 
-  <section class="certificates-hero">
+  <section class="certificate-hero">
 
     <div class="hero-content">
 
       <span class="hero-badge">
-        🏆 YOUR ACHIEVEMENTS
+        🏆 SkillKamao Certificates
       </span>
 
       <h1>
-        Certificates that<br>
-        celebrate your progress.
+        Your Skills.
+        <span>Your Achievement.</span>
       </h1>
 
       <p>
-        Complete your courses, request your certificate and
-        get it approved by the SkillKamao team.
+        Complete your courses, request your certificate,
+        and showcase your skills with confidence.
       </p>
 
     </div>
 
-    <div class="hero-icon">
-      🏆
-    </div>
-
   </section>
 
 
-  <!-- STATS -->
+  <!-- =========================================
+       STATS
+  ========================================== -->
 
   <section class="certificate-stats">
 
-    <div class="certificate-stat">
+    <div class="stat-card">
 
-      <span>🏆</span>
+      <div class="stat-icon">
+        🏆
+      </div>
 
       <div>
+
         <strong>
-          {{ earnedCertificates.length }}
+          {{ earnedCertificates().length }}
         </strong>
 
-        <small>
+        <span>
           Certificates Earned
-        </small>
+        </span>
+
       </div>
 
     </div>
 
 
-    <div class="certificate-stat">
+    <div class="stat-card">
 
-      <span>⏳</span>
+      <div class="stat-icon">
+        ⏳
+      </div>
 
       <div>
+
         <strong>
-          {{ pendingCertificates.length }}
+          {{ pendingCertificates().length }}
         </strong>
 
-        <small>
+        <span>
           Pending Requests
-        </small>
+        </span>
+
       </div>
 
     </div>
 
 
-    <div class="certificate-stat">
+    <div class="stat-card">
 
-      <span>📚</span>
+      <div class="stat-icon">
+        📚
+      </div>
 
       <div>
+
         <strong>
-          4
+          {{ courses().length }}
         </strong>
 
-        <small>
+        <span>
           Available Courses
-        </small>
+        </span>
+
       </div>
 
     </div>
@@ -86,75 +98,86 @@
   </section>
 
 
-  <!-- EARNED -->
+  <!-- =========================================
+       LOADING
+  ========================================== -->
 
-  @if (earnedCertificates.length > 0) {
+  @if (loadingCourses() && loadingCertificates()) {
+
+    <section class="certificate-section">
+
+      <div class="loading-card">
+
+        <div class="loading-spinner"></div>
+
+        <h3>
+          Loading your certificates...
+        </h3>
+
+        <p>
+          Connecting with SkillKamao database.
+        </p>
+
+      </div>
+
+    </section>
+
+  }
+
+
+  <!-- =========================================
+       EARNED CERTIFICATES
+  ========================================== -->
+
+  @if (
+    !loadingCertificates &&
+    earnedCertificates.length > 0
+  ) {
 
     <section class="certificate-section">
 
       <div class="section-heading">
 
-        <div>
-          <span>YOUR ACHIEVEMENTS</span>
+        <span class="section-label">
+          ACHIEVEMENTS
+        </span>
 
-          <h2>
-            Earned Certificates
-          </h2>
-        </div>
+        <h2>
+          Your Earned Certificates
+        </h2>
+
+        <p>
+          Certificates approved by SkillKamao.
+        </p>
 
       </div>
 
 
-      <div class="certificate-grid">
+      <div class="earned-grid">
 
         @for (
-          certificate of earnedCertificates;
-          track certificate.course
+          certificate of earnedCertificates();
+          track certificate.id
         ) {
 
-          <div class="certificate-card earned">
+          <div class="earned-card">
 
             <div class="certificate-preview">
 
-              <div class="preview-border">
-
-                <div class="preview-icon">
-                  🏆
-                </div>
-
-                <span>
-                  SKILLKAMAO
-                </span>
-
-                <h3>
-                  Certificate of Completion
-                </h3>
-
-                <p>
-                  {{ certificate.course }}
-                </p>
-
-                <small>
-                  Successfully Completed
-                </small>
-
+              <div class="certificate-icon">
+                🏆
               </div>
 
-            </div>
-
-
-            <div class="certificate-details">
-
-              <span class="certificate-status">
-                ✓ APPROVED
+              <span>
+                SKILLKAMAO
               </span>
 
               <h3>
-                {{ certificate.course }}
+                Certificate of Completion
               </h3>
 
               <p>
-                Issued on {{ certificate.date }}
+                {{ certificate.course }}
               </p>
 
               <small>
@@ -162,16 +185,64 @@
                 {{ certificate.certificateId }}
               </small>
 
+            </div>
+
+
+            <div class="earned-info">
+
+              <h3>
+                {{ certificate.course }}
+              </h3>
+
+              <span class="approved-badge">
+                ✓ Approved
+              </span>
+
+
+              <div class="certificate-meta">
+
+                <div>
+
+                  <span>
+                    Issued Date
+                  </span>
+
+                  <strong>
+                    {{ certificate.date }}
+                  </strong>
+
+                </div>
+
+
+                <div>
+
+                  <span>
+                    Certificate ID
+                  </span>
+
+                  <strong>
+                    {{ certificate.certificateId }}
+                  </strong>
+
+                </div>
+
+              </div>
+
+
               <div class="certificate-actions">
 
-                <button type="button">
-                  View Certificate
+                <button
+                  type="button"
+                  class="btn-primary"
+                >
+                  👁 View Certificate
                 </button>
 
                 <button
                   type="button"
-                  class="secondary-button">
-                  Download
+                  class="btn-secondary"
+                >
+                  ⬇ Download
                 </button>
 
               </div>
@@ -189,21 +260,31 @@
   }
 
 
-  <!-- PENDING -->
+  <!-- =========================================
+       PENDING
+  ========================================== -->
 
-  @if (pendingCertificates.length > 0) {
+  @if (
+    !loadingCertificates &&
+    pendingCertificates.length > 0
+  ) {
 
     <section class="certificate-section">
 
       <div class="section-heading">
 
-        <div>
-          <span>WAITING FOR APPROVAL</span>
+        <span class="section-label">
+          UNDER REVIEW
+        </span>
 
-          <h2>
-            Certificate Requests
-          </h2>
-        </div>
+        <h2>
+          Pending Certificates
+        </h2>
+
+        <p>
+          Your certificate requests are waiting
+          for admin approval.
+        </p>
 
       </div>
 
@@ -211,35 +292,30 @@
       <div class="pending-grid">
 
         @for (
-          certificate of pendingCertificates;
-          track certificate.course
+          certificate of pendingCertificates();
+          track certificate.id
         ) {
 
           <div class="pending-card">
 
             <div class="pending-icon">
-              {{ certificate.icon }}
+              ⏳
             </div>
 
             <div class="pending-content">
-
-              <span>
-                ⏳ PENDING
-              </span>
 
               <h3>
                 {{ certificate.course }}
               </h3>
 
-              <p>
-                Your certificate request has been submitted
-                and is waiting for admin approval.
-              </p>
+              <span class="pending-status">
+                Pending Approval
+              </span>
 
-              <small>
-                Requested:
+              <p>
+                Requested on
                 {{ certificate.requestedAt }}
-              </small>
+              </p>
 
             </div>
 
@@ -254,477 +330,420 @@
   }
 
 
-  <!-- AVAILABLE COURSES -->
+  <!-- =========================================
+       REJECTED
+  ========================================== -->
+
+  @if (
+    !loadingCertificates &&
+    rejectedCertificates.length > 0
+  ) {
+
+    <section class="certificate-section">
+
+      <div class="section-heading">
+
+        <span class="section-label">
+          REVIEW RESULT
+        </span>
+
+        <h2>
+          Rejected Certificates
+        </h2>
+
+        <p>
+          These certificate requests were rejected.
+        </p>
+
+      </div>
+
+
+      <div class="pending-grid">
+
+        @for (
+          certificate of rejectedCertificates();
+          track certificate.id
+        ) {
+
+          <div class="pending-card rejected-card">
+
+            <div class="pending-icon">
+              ❌
+            </div>
+
+            <div class="pending-content">
+
+              <h3>
+                {{ certificate.course }}
+              </h3>
+
+              <span class="rejected-status">
+                Rejected
+              </span>
+
+              <p>
+                Requested on
+                {{ certificate.requestedAt }}
+              </p>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    </section>
+
+  }
+
+
+  <!-- =========================================
+       AVAILABLE COURSES
+  ========================================== -->
 
   <section class="certificate-section">
 
     <div class="section-heading">
 
-      <div>
+      <span class="section-label">
+        CERTIFICATE ELIGIBILITY
+      </span>
 
-        <span>EARN YOUR CERTIFICATE</span>
+      <h2>
+        Complete a Course & Earn
+      </h2>
 
-        <h2>
-          Course Certificates
-        </h2>
-
-        <p>
-          Complete a course to become eligible for a certificate.
-        </p>
-
-      </div>
+      <p>
+        Finish all lessons in a course to request
+        your SkillKamao certificate.
+      </p>
 
     </div>
 
 
-    <div class="upcoming-grid">
+    @if (loadingCourses()) {
 
-      <!-- CANVA -->
+      <div class="loading-card">
 
-      <div class="upcoming-card">
+        <div class="loading-spinner"></div>
 
-        <div class="upcoming-top">
+        <p>
+          Loading courses...
+        </p>
 
-          <div class="upcoming-icon">
-            🎨
-          </div>
+      </div>
 
-          <span class="locked">
-            🔒 Certificate
-          </span>
+    }
 
+    @else if (courses().length === 0) {
+
+      <div class="empty-card">
+
+        <div>
+          📚
         </div>
 
         <h3>
-          Canva Mastery
+          No courses available
         </h3>
 
         <p>
-          Complete all 4 lessons to request your certificate.
+          Published courses will appear here.
         </p>
 
-        <div class="upcoming-progress">
+      </div>
 
-          <div class="progress-info">
-            <span>Course Progress</span>
+    }
 
-            <strong>
-              {{ getCourseProgress('Canva Mastery') }}%
-            </strong>
-          </div>
+    @else {
 
-          <div class="progress-bar">
+      <div class="course-certificate-grid">
 
-            <div
-              class="progress-fill"
-              [style.width.%]="getCourseProgress('Canva Mastery')">
+        @for (
+          course of courses();
+          track course.id
+        ) {
+
+          <div class="course-certificate-card">
+
+            <div class="course-icon">
+              {{ course.icon }}
+            </div>
+
+
+            <div class="course-content">
+
+              <h3>
+                {{ course.name }}
+              </h3>
+
+              <p>
+                {{ course.description }}
+              </p>
+
+
+              <div class="course-details">
+
+                <span>
+                  {{ course.level }}
+                </span>
+
+                <span>
+                  {{ course.duration }}
+                </span>
+
+                <span>
+                  {{ course.totalLessons }}
+                  Lessons
+                </span>
+
+              </div>
+
+
+              <!-- PROGRESS -->
+
+              <div class="progress-wrapper">
+
+                <div class="progress-info">
+
+                  <span>
+                    Course Progress
+                  </span>
+
+                  <strong>
+                    {{ course.progress }}%
+                  </strong>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                  <div
+                    class="progress-fill"
+                    [style.width.%]="course.progress"
+                  ></div>
+
+                </div>
+
+
+                <small>
+                  {{ course.completedLessons }}
+                  /
+                  {{ course.totalLessons }}
+                  lessons completed
+                </small>
+
+              </div>
+
+
+              <!-- APPROVED -->
+
+              @if (
+                isEarned(course.name)
+              ) {
+
+                <button
+                  type="button"
+                  class="certificate-btn earned-btn"
+                  disabled
+                >
+                  ✓ Certificate Approved
+                </button>
+
+              }
+
+
+              <!-- PENDING -->
+
+              @else if (
+                isPending(course.name)
+              ) {
+
+                <button
+                  type="button"
+                  class="certificate-btn pending-btn"
+                  disabled
+                >
+                  ⏳ Request Pending
+                </button>
+
+              }
+
+
+              <!-- REJECTED -->
+
+              @else if (
+                isRejected(course.name)
+              ) {
+
+                <button
+                  type="button"
+                  class="certificate-btn rejected-btn"
+                  (click)="requestCertificate(course.name)"
+                >
+                  🔄 Request Again
+                </button>
+
+              }
+
+
+              <!-- COMPLETE -->
+
+              @else if (
+                course.progress === 100
+              ) {
+
+                <button
+                  type="button"
+                  class="certificate-btn"
+                  (click)="requestCertificate(course.name)"
+                >
+                  🏆 Request Certificate
+                </button>
+
+              }
+
+
+              <!-- INCOMPLETE -->
+
+              @else {
+
+                <a
+                  class="certificate-btn continue-btn"
+                  [routerLink]="[
+                    '/lesson',
+                    course.name
+                  ]"
+                >
+                  📖 Continue Course
+                </a>
+
+              }
+
             </div>
 
           </div>
-
-        </div>
-
-
-        @if (
-          getCourseProgress('Canva Mastery') === 100
-        ) {
-
-          @if (
-            isPending('Canva Mastery')
-          ) {
-
-            <button
-              type="button"
-              class="request-button pending-button">
-
-              ⏳ Request Pending
-
-            </button>
-
-          } @else {
-
-            <button
-              type="button"
-              class="request-button"
-              (click)="requestCertificate('Canva Mastery', '🎨')">
-
-              🏆 Request Certificate
-
-            </button>
-
-          }
-
-        } @else {
-
-          <button
-            type="button"
-            class="request-button locked-button"
-            routerLink="/lesson/Canva%20Mastery">
-
-            🔒 Complete Course
-
-          </button>
 
         }
 
       </div>
 
-
-      <!-- VIDEO EDITING -->
-
-      <div class="upcoming-card">
-
-        <div class="upcoming-top">
-
-          <div class="upcoming-icon">
-            🎬
-          </div>
-
-          <span class="locked">
-            🔒 Certificate
-          </span>
-
-        </div>
-
-        <h3>
-          Video Editing
-        </h3>
-
-        <p>
-          Complete all 4 lessons to request your certificate.
-        </p>
-
-        <div class="upcoming-progress">
-
-          <div class="progress-info">
-
-            <span>Course Progress</span>
-
-            <strong>
-              {{ getCourseProgress('Video Editing') }}%
-            </strong>
-
-          </div>
-
-          <div class="progress-bar">
-
-            <div
-              class="progress-fill"
-              [style.width.%]="getCourseProgress('Video Editing')">
-            </div>
-
-          </div>
-
-        </div>
-
-
-        @if (
-          getCourseProgress('Video Editing') === 100
-        ) {
-
-          @if (
-            isPending('Video Editing')
-          ) {
-
-            <button
-              type="button"
-              class="request-button pending-button">
-
-              ⏳ Request Pending
-
-            </button>
-
-          } @else {
-
-            <button
-              type="button"
-              class="request-button"
-              (click)="requestCertificate('Video Editing', '🎬')">
-
-              🏆 Request Certificate
-
-            </button>
-
-          }
-
-        } @else {
-
-          <button
-            type="button"
-            class="request-button locked-button"
-            routerLink="/lesson/Video%20Editing">
-
-            🔒 Complete Course
-
-          </button>
-
-        }
-
-      </div>
-
-
-      <!-- WEB DEVELOPMENT -->
-
-      <div class="upcoming-card">
-
-        <div class="upcoming-top">
-
-          <div class="upcoming-icon">
-            💻
-          </div>
-
-          <span class="locked">
-            🔒 Certificate
-          </span>
-
-        </div>
-
-        <h3>
-          Web Development
-        </h3>
-
-        <p>
-          Complete all 4 lessons to request your certificate.
-        </p>
-
-        <div class="upcoming-progress">
-
-          <div class="progress-info">
-
-            <span>Course Progress</span>
-
-            <strong>
-              {{ getCourseProgress('Web Development') }}%
-            </strong>
-
-          </div>
-
-          <div class="progress-bar">
-
-            <div
-              class="progress-fill"
-              [style.width.%]="getCourseProgress('Web Development')">
-            </div>
-
-          </div>
-
-        </div>
-
-
-        @if (
-          getCourseProgress('Web Development') === 100
-        ) {
-
-          @if (
-            isPending('Web Development')
-          ) {
-
-            <button
-              type="button"
-              class="request-button pending-button">
-
-              ⏳ Request Pending
-
-            </button>
-
-          } @else {
-
-            <button
-              type="button"
-              class="request-button"
-              (click)="requestCertificate('Web Development', '💻')">
-
-              🏆 Request Certificate
-
-            </button>
-
-          }
-
-        } @else {
-
-          <button
-            type="button"
-            class="request-button locked-button"
-            routerLink="/lesson/Web%20Development">
-
-            🔒 Complete Course
-
-          </button>
-
-        }
-
-      </div>
-
-
-      <!-- AI TOOLS -->
-
-      <div class="upcoming-card">
-
-        <div class="upcoming-top">
-
-          <div class="upcoming-icon">
-            🤖
-          </div>
-
-          <span class="locked">
-            🔒 Certificate
-          </span>
-
-        </div>
-
-        <h3>
-          AI Tools
-        </h3>
-
-        <p>
-          Complete all 4 lessons to request your certificate.
-        </p>
-
-        <div class="upcoming-progress">
-
-          <div class="progress-info">
-
-            <span>Course Progress</span>
-
-            <strong>
-              {{ getCourseProgress('AI Tools') }}%
-            </strong>
-
-          </div>
-
-          <div class="progress-bar">
-
-            <div
-              class="progress-fill"
-              [style.width.%]="getCourseProgress('AI Tools')">
-            </div>
-
-          </div>
-
-        </div>
-
-
-        @if (
-          getCourseProgress('AI Tools') === 100
-        ) {
-
-          @if (
-            isPending('AI Tools')
-          ) {
-
-            <button
-              type="button"
-              class="request-button pending-button">
-
-              ⏳ Request Pending
-
-            </button>
-
-          } @else {
-
-            <button
-              type="button"
-              class="request-button"
-              (click)="requestCertificate('AI Tools', '🤖')">
-
-              🏆 Request Certificate
-
-            </button>
-
-          }
-
-        } @else {
-
-          <button
-            type="button"
-            class="request-button locked-button"
-            routerLink="/lesson/AI%20Tools">
-
-            🔒 Complete Course
-
-          </button>
-
-        }
-
-      </div>
-
-    </div>
+    }
 
   </section>
 
 
-  <!-- HOW IT WORKS -->
+  <!-- =========================================
+       HOW IT WORKS
+  ========================================== -->
 
-  <section class="how-certificate-works">
+  <section class="how-section">
 
     <div class="section-heading centered">
 
-      <span>HOW IT WORKS</span>
+      <span class="section-label">
+        SIMPLE PROCESS
+      </span>
 
       <h2>
-        From learning to certificate.
+        How Certificates Work
       </h2>
+
+      <p>
+        Four simple steps to earn your certificate.
+      </p>
 
     </div>
 
 
-    <div class="certificate-steps">
+    <div class="steps-grid">
 
-      <div class="certificate-step">
+      <div class="step-card">
 
-        <div>1</div>
+        <div class="step-number">
+          01
+        </div>
+
+        <div class="step-icon">
+          📚
+        </div>
 
         <h3>
           Learn
         </h3>
 
         <p>
-          Complete all lessons in your selected course.
+          Watch all course lessons and learn
+          the required skills.
         </p>
 
       </div>
 
 
-      <div class="certificate-step">
+      <div class="step-card">
 
-        <div>2</div>
+        <div class="step-number">
+          02
+        </div>
+
+        <div class="step-icon">
+          ✅
+        </div>
+
+        <h3>
+          Complete
+        </h3>
+
+        <p>
+          Complete every lesson in your selected
+          course.
+        </p>
+
+      </div>
+
+
+      <div class="step-card">
+
+        <div class="step-number">
+          03
+        </div>
+
+        <div class="step-icon">
+          📩
+        </div>
 
         <h3>
           Request
         </h3>
 
         <p>
-          Submit a certificate request after completing the course.
+          Submit your certificate request after
+          completing the course.
         </p>
 
       </div>
 
 
-      <div class="certificate-step">
+      <div class="step-card">
 
-        <div>3</div>
+        <div class="step-number">
+          04
+        </div>
 
-        <h3>
-          Admin Review
-        </h3>
-
-        <p>
-          SkillKamao admin reviews your completion.
-        </p>
-
-      </div>
-
-
-      <div class="certificate-step">
-
-        <div>4</div>
+        <div class="step-icon">
+          🏆
+        </div>
 
         <h3>
           Get Certified
         </h3>
 
         <p>
-          Once approved, your certificate becomes available.
+          Admin reviews your request and approves
+          your certificate.
         </p>
 
       </div>
@@ -733,5 +752,38 @@
 
   </section>
 
+
+  <!-- =========================================
+       CTA
+  ========================================== -->
+
+  <section class="certificate-cta">
+
+    <div>
+
+      <span>
+        KEEP LEARNING 🚀
+      </span>
+
+      <h2>
+        Your next achievement is waiting.
+      </h2>
+
+      <p>
+        Keep building your skills and unlock
+        more certificates.
+      </p>
+
+    </div>
+
+
+    <a
+      routerLink="/courses"
+      class="cta-button"
+    >
+      Explore Courses →
+    </a>
+
+  </section>
 
 </div>

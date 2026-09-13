@@ -17,6 +17,9 @@ import { AdminLogin } from './admin-login/admin-login';
 import { Admin } from './admin/admin';
 import { adminGuard } from './guards/admin-guard';
 import { AdminCourses } from './admin-courses/admin-courses';
+import { AdminStudents } from './admin-students/admin-students';
+import { AdminCertificates } from './admin-certificates/admin-certificates';
+import { AdminLessons } from './admin-lessons/admin-lessons';
 
 export const routes: Routes = [
 
@@ -26,29 +29,29 @@ export const routes: Routes = [
 
   { path: 'courses', component: Courses },
 
-  { 
+  {
     path: 'course-details/:courseName',
     component: CourseDetails
   },
 
-  { 
+  {
     path: 'lesson/:courseName',
     component: Lesson
   },
 
   { path: 'dashboard', component: Dashboard, canActivate: [authGuard] },
 
-  { 
+  {
     path: 'roadmaps',
     component: Roadmaps
   },
 
-  { 
+  {
     path: 'login',
     component: Login
   },
 
-  { 
+  {
     path: 'signup',
     component: Signup
   },
@@ -61,7 +64,21 @@ export const routes: Routes = [
 
   { path: 'admin-login', component: AdminLogin },
 
-   { path: 'admin-courses', component: AdminCourses, canActivate: [adminGuard] },
+  { path: 'admin-courses', component: AdminCourses, canActivate: [adminGuard] },
+
+  { path: 'admin-students', component: AdminStudents, canActivate: [adminGuard] },
+
+  {
+    path: 'admin-lessons/:courseId',
+    component: AdminLessons,
+    canActivate: [adminGuard]
+  },
+
+  {
+  path: 'admin-certificates',
+  component: AdminCertificates,
+  canActivate: [adminGuard]
+},
 
   { path: 'admin', component: Admin, canActivate: [adminGuard] },
 

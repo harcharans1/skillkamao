@@ -1,0 +1,566 @@
+<div class="admin-certificates-page">
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <header class="page-header">
+
+    <div>
+
+      <a
+        routerLink="/admin"
+        class="back-link"
+      >
+        ← Back to Dashboard
+      </a>
+
+      <span class="eyebrow">
+        ADMIN PANEL
+      </span>
+
+      <h1>
+        Certificate Requests
+      </h1>
+
+      <p>
+        Review, approve and reject student certificate requests.
+      </p>
+
+    </div>
+
+
+    <!-- REFRESH -->
+
+    <button
+      type="button"
+      class="refresh-btn"
+      (click)="loadCertificates()"
+      [disabled]="loading()"
+    >
+
+      @if (loading()) {
+        ↻ Loading...
+      } @else {
+        ↻ Refresh
+      }
+
+    </button>
+
+  </header>
+
+
+
+  <!-- =========================================
+       STATS
+  ========================================== -->
+
+  <section class="stats-grid">
+
+
+    <!-- TOTAL -->
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        📜
+      </div>
+
+      <div>
+
+        <strong>
+          {{ totalCount }}
+        </strong>
+
+        <span>
+          Total Requests
+        </span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- PENDING -->
+
+    <div class="stat-card pending">
+
+      <div class="stat-icon">
+        ⏳
+      </div>
+
+      <div>
+
+        <strong>
+          {{ pendingCount }}
+        </strong>
+
+        <span>
+          Pending
+        </span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- APPROVED -->
+
+    <div class="stat-card approved">
+
+      <div class="stat-icon">
+        ✓
+      </div>
+
+      <div>
+
+        <strong>
+          {{ approvedCount }}
+        </strong>
+
+        <span>
+          Approved
+        </span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- REJECTED -->
+
+    <div class="stat-card rejected">
+
+      <div class="stat-icon">
+        ✕
+      </div>
+
+      <div>
+
+        <strong>
+          {{ rejectedCount }}
+        </strong>
+
+        <span>
+          Rejected
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       FILTER
+  ========================================== -->
+
+  <section class="toolbar">
+
+    <div class="filter-buttons">
+
+
+      <!-- ALL -->
+
+      <button
+        type="button"
+        [class.active]="filter() === 'all'"
+        (click)="setFilter('all')"
+      >
+        All
+      </button>
+
+
+      <!-- PENDING -->
+
+      <button
+        type="button"
+        [class.active]="filter() === 'pending'"
+        (click)="setFilter('pending')"
+      >
+        Pending
+      </button>
+
+
+      <!-- APPROVED -->
+
+      <button
+        type="button"
+        [class.active]="filter() === 'approved'"
+        (click)="setFilter('approved')"
+      >
+        Approved
+      </button>
+
+
+      <!-- REJECTED -->
+
+      <button
+        type="button"
+        [class.active]="filter() === 'rejected'"
+        (click)="setFilter('rejected')"
+      >
+        Rejected
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       LOADING
+  ========================================== -->
+
+  @if (loading()) {
+
+    <section class="state-card">
+
+      <div class="spinner"></div>
+
+      <h3>
+        Loading certificate requests...
+      </h3>
+
+      <p>
+        Connecting to SkillKamao database.
+      </p>
+
+    </section>
+
+  }
+
+
+  <!-- =========================================
+       EMPTY
+  ========================================== -->
+
+  @else if (filteredCertificates.length === 0) {
+
+    <section class="state-card">
+
+      <div class="empty-icon">
+        🏆
+      </div>
+
+      <h3>
+        No certificate requests
+      </h3>
+
+      <p>
+        There are no requests in this category.
+      </p>
+
+    </section>
+
+  }
+
+
+  <!-- =========================================
+       TABLE
+  ========================================== -->
+
+  @else {
+
+    <section class="table-card">
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <!-- TABLE HEADER -->
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Student
+              </th>
+
+              <th>
+                Course
+              </th>
+
+              <th>
+                Requested
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <!-- TABLE BODY -->
+
+          <tbody>
+
+            @for (
+              certificate of filteredCertificates;
+              track certificate.id
+            ) {
+
+              <tr>
+
+
+                <!-- =========================
+                     STUDENT
+                ========================== -->
+
+                <td>
+
+                  <div class="student-cell">
+
+                    <div class="avatar">
+
+                      {{
+                        certificate.studentName
+                          .charAt(0)
+                          .toUpperCase()
+                      }}
+
+                    </div>
+
+
+                    <div>
+
+                      <strong>
+                        {{ certificate.studentName }}
+                      </strong>
+
+                      <span>
+                        {{ certificate.email }}
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+
+                <!-- =========================
+                     COURSE
+                ========================== -->
+
+                <td>
+
+                  <div class="course-cell">
+
+                    <span class="course-icon">
+                      🏆
+                    </span>
+
+                    <strong>
+                      {{ certificate.course }}
+                    </strong>
+
+                  </div>
+
+                </td>
+
+
+
+                <!-- =========================
+                     REQUEST DATE
+                ========================== -->
+
+                <td>
+
+                  {{ formatDate(certificate.requestedAt) }}
+
+                </td>
+
+
+
+                <!-- =========================
+                     STATUS
+                ========================== -->
+
+                <td>
+
+
+                  <!-- PENDING -->
+
+                  @if (
+                    certificate.status === 'pending'
+                  ) {
+
+                    <span
+                      class="status pending-status"
+                    >
+                      ⏳ Pending
+                    </span>
+
+                  }
+
+
+                  <!-- APPROVED -->
+
+                  @else if (
+                    certificate.status === 'approved'
+                  ) {
+
+                    <span
+                      class="status approved-status"
+                    >
+                      ✓ Approved
+                    </span>
+
+                  }
+
+
+                  <!-- REJECTED -->
+
+                  @else {
+
+                    <span
+                      class="status rejected-status"
+                    >
+                      ✕ Rejected
+                    </span>
+
+                  }
+
+                </td>
+
+
+
+                <!-- =========================
+                     ACTION
+                ========================== -->
+
+                <td>
+
+
+                  <!-- PENDING ACTIONS -->
+
+                  @if (
+                    certificate.status === 'pending'
+                  ) {
+
+                    <div class="action-buttons">
+
+
+                      <!-- APPROVE -->
+
+                      <button
+                        type="button"
+                        class="approve-btn"
+                        [disabled]="
+                          processingId() === certificate.id
+                        "
+                        (click)="
+                          approveCertificate(certificate)
+                        "
+                      >
+
+                        @if (
+                          processingId() === certificate.id
+                        ) {
+
+                          Processing...
+
+                        } @else {
+
+                          ✓ Approve
+
+                        }
+
+                      </button>
+
+
+
+                      <!-- REJECT -->
+
+                      <button
+                        type="button"
+                        class="reject-btn"
+                        [disabled]="
+                          processingId() === certificate.id
+                        "
+                        (click)="
+                          rejectCertificate(certificate)
+                        "
+                      >
+
+                        @if (
+                          processingId() === certificate.id
+                        ) {
+
+                          Processing...
+
+                        } @else {
+
+                          ✕ Reject
+
+                        }
+
+                      </button>
+
+                    </div>
+
+                  }
+
+
+                  <!-- APPROVED -->
+
+                  @else if (
+                    certificate.status === 'approved'
+                  ) {
+
+                    <span class="completed-action">
+
+                      ✓ Certificate Issued
+
+                    </span>
+
+                  }
+
+
+                  <!-- REJECTED -->
+
+                  @else {
+
+                    <span
+                      class="completed-action rejected-text"
+                    >
+
+                      ✕ Request Rejected
+
+                    </span>
+
+                  }
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  }
+
+</div>

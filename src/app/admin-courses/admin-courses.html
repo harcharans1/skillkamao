@@ -14,10 +14,7 @@
       </p>
     </div>
 
-    <button
-      type="button"
-      class="add-course-btn"
-      (click)="openAddCourse()">
+    <button type="button" class="add-course-btn" (click)="openAddCourse()">
 
       + Add New Course
 
@@ -30,143 +27,155 @@
 
   @if (loading()) {
 
-    <div class="loading">
+  <div class="loading">
 
-      <div class="spinner"></div>
+    <div class="spinner"></div>
 
-      <p>Loading courses...</p>
+    <p>Loading courses...</p>
 
-    </div>
+  </div>
 
   } @else {
 
-    <!-- COURSE COUNT -->
+  <!-- COURSE COUNT -->
 
-    <div class="course-count">
+  <div class="course-count">
 
-      <strong>{{ courses().length }}</strong>
+    <strong>{{ courses().length }}</strong>
 
-      courses found
+    courses found
 
-    </div>
-
-
-    <!-- COURSE GRID -->
-
-    <div class="courses-grid">
-
-      @for (course of courses(); track course.id) {
-
-        <div class="course-card">
-
-          <div class="course-top">
-
-            <div class="course-icon">
-              {{ course.icon }}
-            </div>
-
-            @if (course.published) {
-
-              <span class="status published">
-                Published
-              </span>
-
-            } @else {
-
-              <span class="status draft">
-                Draft
-              </span>
-
-            }
-
-          </div>
+  </div>
 
 
-          <div class="course-content">
+  <!-- COURSE GRID -->
 
-            <span class="level">
-              {{ course.level }}
-            </span>
+  <div class="courses-grid">
 
-            <h2>
-              {{ course.name }}
-            </h2>
+    @for (course of courses(); track course.id) {
 
-            <p>
-              {{ course.description }}
-            </p>
+    <div class="course-card">
+
+      <div class="course-top">
+
+        <div class="course-icon">
+          {{ course.icon }}
+        </div>
+
+        <button type="button" class="status" [class.published]="course.published" [class.draft]="!course.published"
+          (click)="togglePublish(course)">
+
+          @if (course.published) {
+          Published ✓
+          } @else {
+          Draft
+          }
+
+        </button>
+
+      </div>
 
 
-            <div class="course-meta">
+      <div class="course-content">
 
-              <span>
-                ⏱ {{ course.duration }}
-              </span>
+        <span class="level">
+          {{ course.level }}
+        </span>
 
-              <span>
-                ⭐ {{ course.rating }}
-              </span>
+        <h2>
+          {{ course.name }}
+        </h2>
 
-            </div>
+        <p>
+          {{ course.description }}
+        </p>
 
 
-            <div class="course-actions">
+        <div class="course-meta">
 
-              <button
-                type="button"
-                class="edit-btn">
+          <span>
+            ⏱ {{ course.duration }}
+          </span>
 
-                Edit
-
-              </button>
-
-              <button
-                type="button"
-                class="delete-btn">
-
-                Delete
-
-              </button>
-
-            </div>
-
-          </div>
+          <span>
+            ⭐ {{ course.rating }}
+          </span>
 
         </div>
 
-      }
+
+        <div class="course-actions">
+
+  <button
+    type="button"
+    class="lessons-btn"
+    [routerLink]="['/admin-lessons', course.id]">
+
+    Lessons
+
+  </button>
 
 
-      @if (courses().length === 0) {
+  <button
+    type="button"
+    class="edit-btn"
+    (click)="openEditCourse(course)">
 
-        <div class="empty-state">
+    Edit
 
-          <div class="empty-icon">
-            📚
-          </div>
+  </button>
 
-          <h2>
-            No Courses Found
-          </h2>
 
-          <p>
-            Start by adding your first SkillKamao course.
-          </p>
+  <button
+    type="button"
+    class="delete-btn"
+    [disabled]="deleting()"
+    (click)="deleteCourse(course)">
 
-          <button
-            type="button"
-            class="add-course-btn"
-            (click)="openAddCourse()">
+    @if (deleting()) {
+      Deleting...
+    } @else {
+      Delete
+    }
 
-            + Add New Course
+  </button>
 
-          </button>
+</div>
 
-        </div>
-
-      }
+      </div>
 
     </div>
+
+    }
+
+
+    @if (courses().length === 0) {
+
+    <div class="empty-state">
+
+      <div class="empty-icon">
+        📚
+      </div>
+
+      <h2>
+        No Courses Found
+      </h2>
+
+      <p>
+        Start by adding your first SkillKamao course.
+      </p>
+
+      <button type="button" class="add-course-btn" (click)="openAddCourse()">
+
+        + Add New Course
+
+      </button>
+
+    </div>
+
+    }
+
+  </div>
 
   }
 
@@ -175,227 +184,195 @@
 
   @if (showForm()) {
 
-    <div
-      class="course-form-overlay"
-      (click)="closeAddCourse()">
+  <div class="course-form-overlay" (click)="closeAddCourse()">
 
 
-      <div
-        class="course-form"
-        (click)="$event.stopPropagation()">
+    <div class="course-form" (click)="$event.stopPropagation()">
 
 
-        <!-- FORM HEADER -->
+      <!-- FORM HEADER -->
 
-        <div class="form-header">
+      <div class="form-header">
 
-          <div>
+        <div>
 
-            <span>NEW COURSE</span>
+          <span>
+            {{ editMode() ? 'EDIT COURSE' : 'NEW COURSE' }}
+          </span>
 
-            <h2>
-              Add New Course
-            </h2>
-
-          </div>
-
-
-          <button
-            type="button"
-            class="close-btn"
-            (click)="closeAddCourse()">
-
-            ×
-
-          </button>
+          <h2>
+            {{ editMode() ? 'Edit Course' : 'Add New Course' }}
+          </h2>
 
         </div>
 
 
-        <!-- FORM -->
+        <button type="button" class="close-btn" (click)="closeAddCourse()">
 
-        <div class="form-body">
+          ×
 
+        </button>
 
-          <!-- COURSE NAME -->
-
-          <div class="form-group">
-
-            <label>
-              Course Name
-            </label>
-
-            <input
-              type="text"
-              placeholder="e.g. Canva Mastery"
-              [(ngModel)]="courseName">
-
-          </div>
+      </div>
 
 
-          <!-- DESCRIPTION -->
+      <!-- FORM -->
 
-          <div class="form-group">
-
-            <label>
-              Description
-            </label>
-
-            <textarea
-              rows="4"
-              placeholder="Enter course description"
-              [(ngModel)]="description">
-            </textarea>
-
-          </div>
+      <div class="form-body">
 
 
-          <!-- TWO COLUMNS -->
+        <!-- COURSE NAME -->
 
-          <div class="form-row">
+        <div class="form-group">
 
-
-            <!-- ICON -->
-
-            <div class="form-group">
-
-              <label>
-                Icon
-              </label>
-
-              <input
-                type="text"
-                placeholder="📚"
-                [(ngModel)]="icon">
-
-            </div>
-
-
-            <!-- LEVEL -->
-
-            <div class="form-group">
-
-              <label>
-                Level
-              </label>
-
-              <select
-                [(ngModel)]="level">
-
-                <option value="BEGINNER">
-                  BEGINNER
-                </option>
-
-                <option value="INTERMEDIATE">
-                  INTERMEDIATE
-                </option>
-
-                <option value="ADVANCED">
-                  ADVANCED
-                </option>
-
-              </select>
-
-            </div>
-
-          </div>
-
-
-          <!-- SECOND ROW -->
-
-          <div class="form-row">
-
-
-            <!-- DURATION -->
-
-            <div class="form-group">
-
-              <label>
-                Duration
-              </label>
-
-              <input
-                type="text"
-                placeholder="e.g. 4 Hours"
-                [(ngModel)]="duration">
-
-            </div>
-
-
-            <!-- RATING -->
-
-            <div class="form-group">
-
-              <label>
-                Rating
-              </label>
-
-              <input
-                type="number"
-                min="0"
-                max="5"
-                step="0.1"
-                [(ngModel)]="rating">
-
-            </div>
-
-          </div>
-
-
-          <!-- PUBLISHED -->
-
-          <label class="publish-option">
-
-            <input
-              type="checkbox"
-              [(ngModel)]="published">
-
-            <span>
-              Publish this course immediately
-            </span>
-
+          <label>
+            Course Name
           </label>
 
+          <input type="text" placeholder="e.g. Canva Mastery" [(ngModel)]="courseName">
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="form-group">
+
+          <label>
+            Description
+          </label>
+
+          <textarea rows="4" placeholder="Enter course description" [(ngModel)]="description">
+            </textarea>
+
         </div>
 
 
-        <!-- FORM ACTIONS -->
+        <!-- TWO COLUMNS -->
 
-        <div class="form-actions">
-
-          <button
-            type="button"
-            class="cancel-btn"
-            (click)="closeAddCourse()">
-
-            Cancel
-
-          </button>
+        <div class="form-row">
 
 
-          <button
-            type="button"
-            class="save-btn"
-            [disabled]="saving()"
-            (click)="saveCourse()">
+          <!-- ICON -->
 
-            @if (saving()) {
+          <div class="form-group">
 
-              Saving...
+            <label>
+              Icon
+            </label>
 
-            } @else {
+            <input type="text" placeholder="📚" [(ngModel)]="icon">
 
-              Save Course
+          </div>
 
-            }
 
-          </button>
+          <!-- LEVEL -->
+
+          <div class="form-group">
+
+            <label>
+              Level
+            </label>
+
+            <select [(ngModel)]="level">
+
+              <option value="BEGINNER">
+                BEGINNER
+              </option>
+
+              <option value="INTERMEDIATE">
+                INTERMEDIATE
+              </option>
+
+              <option value="ADVANCED">
+                ADVANCED
+              </option>
+
+            </select>
+
+          </div>
 
         </div>
+
+
+        <!-- SECOND ROW -->
+
+        <div class="form-row">
+
+
+          <!-- DURATION -->
+
+          <div class="form-group">
+
+            <label>
+              Duration
+            </label>
+
+            <input type="text" placeholder="e.g. 4 Hours" [(ngModel)]="duration">
+
+          </div>
+
+
+          <!-- RATING -->
+
+          <div class="form-group">
+
+            <label>
+              Rating
+            </label>
+
+            <input type="number" min="0" max="5" step="0.1" [(ngModel)]="rating">
+
+          </div>
+
+        </div>
+
+
+        <!-- PUBLISHED -->
+
+        <label class="publish-option">
+
+          <input type="checkbox" [(ngModel)]="published">
+
+          <span>
+            Publish this course immediately
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <!-- FORM ACTIONS -->
+
+      <div class="form-actions">
+
+        <button type="button" class="cancel-btn" (click)="closeAddCourse()">
+
+          Cancel
+
+        </button>
+
+
+        <button type="button" class="save-btn" [disabled]="saving()" (click)="saveCourse()">
+
+          @if (saving()) {
+
+          Saving...
+
+          } @else {
+
+          {{ editMode() ? 'Update Course' : 'Save Course' }}
+
+          }
+
+        </button>
 
       </div>
 
     </div>
+
+  </div>
 
   }
 

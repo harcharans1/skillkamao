@@ -426,3 +426,42 @@
 .save-btn:hover {
   background: #4f46e5;
 }
+
+.status {
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.status:hover {
+  transform: translateY(-1px);
+}
+
+.status.published:hover {
+  background: #bbf7d0;
+}
+
+.status.draft:hover {
+  background: #fde68a;
+}
+.lessons-btn {
+  grid-column: 1 / -1;
+
+  height: 40px;
+
+  border: 1px solid #e0e7ff;
+  border-radius: 8px;
+
+  background: #f5f7ff;
+  color: #4f46e5;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.lessons-btn:hover {
+  background: #e0e7ff;
+}

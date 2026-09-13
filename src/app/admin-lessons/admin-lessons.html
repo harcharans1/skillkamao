@@ -1,0 +1,540 @@
+<div class="admin-lessons-page">
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <div class="page-header">
+
+    <div>
+
+      <a
+        routerLink="/admin-courses"
+        class="back-link">
+
+        ← Back to Courses
+
+      </a>
+
+
+      @if (course()) {
+
+        <span class="eyebrow">
+          {{ course().name }}
+        </span>
+
+        <h1>
+          Manage Lessons
+        </h1>
+
+        <p>
+          Add and manage lessons for this course.
+        </p>
+
+      } @else {
+
+        <h1>
+          Manage Lessons
+        </h1>
+
+        <p>
+          Add and manage lessons for this course.
+        </p>
+
+      }
+
+    </div>
+
+
+    <button
+      type="button"
+      class="add-lesson-btn"
+      (click)="openAddLesson()">
+
+      + Add New Lesson
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================================
+       LOADING
+  ========================================== -->
+
+  @if (loading()) {
+
+    <div class="loading">
+
+      <div class="spinner"></div>
+
+      <p>
+        Loading lessons...
+      </p>
+
+    </div>
+
+  } @else {
+
+
+    <!-- =========================================
+         COURSE INFO
+    ========================================== -->
+
+    @if (course()) {
+
+      <div class="course-info">
+
+        <div class="course-info-icon">
+          {{ course().icon }}
+        </div>
+
+
+        <div>
+
+          <span>
+            {{ course().level }}
+          </span>
+
+          <h2>
+            {{ course().name }}
+          </h2>
+
+          <p>
+            {{ course().description }}
+          </p>
+
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- =========================================
+         LESSON COUNT
+    ========================================== -->
+
+    <div class="lesson-count">
+
+      <strong>
+        {{ lessons().length }}
+      </strong>
+
+      lessons found
+
+    </div>
+
+
+    <!-- =========================================
+         LESSON LIST
+    ========================================== -->
+
+    <div class="lessons-list">
+
+      @for (
+        lesson of lessons();
+        track lesson.id
+      ) {
+
+        <div class="lesson-card">
+
+
+          <!-- LESSON NUMBER -->
+
+          <div class="lesson-number">
+
+            {{ lesson.lesson_number }}
+
+          </div>
+
+
+          <!-- LESSON CONTENT -->
+
+          <div class="lesson-content">
+
+            <span>
+              LESSON {{ lesson.lesson_number }}
+            </span>
+
+            <h2>
+              {{ lesson.title }}
+            </h2>
+
+            <p>
+              ⏱ {{ lesson.duration }}
+            </p>
+
+          </div>
+
+
+          <!-- VIDEO STATUS -->
+
+          <div class="lesson-video">
+
+            @if (lesson.video_url) {
+
+              <span class="video-ready">
+                🎥 Video Added
+              </span>
+
+            } @else {
+
+              <span class="video-missing">
+                ⚠ No Video
+              </span>
+
+            }
+
+          </div>
+
+
+          <!-- ACTIONS -->
+
+          <div class="lesson-actions">
+
+            <button
+              type="button"
+              class="edit-btn"
+              (click)="openEditLesson(lesson)">
+
+              Edit
+
+            </button>
+
+
+            <button
+              type="button"
+              class="delete-btn"
+              [disabled]="deleting()"
+              (click)="deleteLesson(lesson)">
+
+              @if (deleting()) {
+
+                Deleting...
+
+              } @else {
+
+                Delete
+
+              }
+
+            </button>
+
+          </div>
+
+        </div>
+
+      }
+
+
+      <!-- =========================================
+           EMPTY STATE
+      ========================================== -->
+
+      @if (lessons().length === 0) {
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            🎥
+          </div>
+
+          <h2>
+            No Lessons Found
+          </h2>
+
+          <p>
+            Start by adding the first lesson
+            to this course.
+          </p>
+
+          <button
+            type="button"
+            class="add-lesson-btn"
+            (click)="openAddLesson()">
+
+            + Add New Lesson
+
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+
+  <!-- =========================================
+       ADD / EDIT LESSON MODAL
+  ========================================== -->
+
+  @if (showForm()) {
+
+    <div
+      class="lesson-form-overlay"
+      (click)="closeLessonForm()">
+
+
+      <div
+        class="lesson-form"
+        (click)="$event.stopPropagation()">
+
+
+        <!-- =====================================
+             FORM HEADER
+        ====================================== -->
+
+        <div class="form-header">
+
+          <div>
+
+            <span>
+              {{ editMode() ? 'EDIT LESSON' : 'NEW LESSON' }}
+            </span>
+
+            <h2>
+              {{ editMode() ? 'Edit Lesson' : 'Add New Lesson' }}
+            </h2>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="close-btn"
+            (click)="closeLessonForm()">
+
+            ×
+
+          </button>
+
+        </div>
+
+
+        <!-- =====================================
+             FORM BODY
+        ====================================== -->
+
+        <div class="form-body">
+
+
+          <!-- LESSON NUMBER -->
+
+          <div class="form-group">
+
+            <label>
+              Lesson Number
+            </label>
+
+            <input
+              type="number"
+              min="1"
+              [(ngModel)]="lessonNumber">
+
+          </div>
+
+
+          <!-- LESSON TITLE -->
+
+          <div class="form-group">
+
+            <label>
+              Lesson Title
+            </label>
+
+            <input
+              type="text"
+              placeholder="e.g. Introduction to Canva"
+              [(ngModel)]="title">
+
+          </div>
+
+
+          <!-- DURATION -->
+
+          <div class="form-group">
+
+            <label>
+              Duration
+            </label>
+
+            <input
+              type="text"
+              placeholder="e.g. 15 min"
+              [(ngModel)]="duration">
+
+          </div>
+
+
+          <!-- =====================================
+               VIDEO FILE
+          ====================================== -->
+
+          <div class="form-group">
+
+            <label>
+              Video File
+            </label>
+
+
+            <input
+              type="file"
+              accept="video/*"
+              (change)="onVideoSelected($event)">
+
+
+            @if (selectedVideo) {
+
+              <div class="selected-video">
+
+                🎥
+
+                <span>
+                  {{ selectedVideo.name }}
+                </span>
+
+              </div>
+
+
+              <button
+                type="button"
+                class="upload-video-btn"
+                [disabled]="uploadingVideo()"
+                (click)="uploadVideo()">
+
+                @if (uploadingVideo()) {
+
+                  Uploading...
+
+                } @else {
+
+                  Upload Video
+
+                }
+
+              </button>
+
+            }
+
+          </div>
+
+
+          <!-- =====================================
+               VIDEO URL
+          ====================================== -->
+
+          <div class="form-group">
+
+            <label>
+              Video URL
+            </label>
+
+
+            <input
+              type="text"
+              placeholder="Video URL will appear here"
+              [(ngModel)]="videoUrl">
+
+
+            @if (videoUrl) {
+
+              <small class="video-url-success">
+
+                ✓ Video ready to save
+
+              </small>
+
+            } @else {
+
+              <small>
+
+                Upload a video or enter a video URL manually.
+
+              </small>
+
+            }
+
+          </div>
+
+
+          <!-- =====================================
+               VIDEO PREVIEW
+          ====================================== -->
+
+          @if (videoUrl) {
+
+            <div class="video-preview">
+
+
+              <div class="preview-header">
+
+                <span>
+                  VIDEO PREVIEW
+                </span>
+
+              </div>
+
+
+              <video
+                class="preview-player"
+                controls
+                preload="metadata"
+                [src]="videoUrl">
+
+              </video>
+
+
+            </div>
+
+          }
+
+        </div>
+
+
+        <!-- =====================================
+             FORM ACTIONS
+        ====================================== -->
+
+        <div class="form-actions">
+
+
+          <button
+            type="button"
+            class="cancel-btn"
+            (click)="closeLessonForm()">
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="button"
+            class="save-btn"
+            [disabled]="saving()"
+            (click)="saveLesson()">
+
+            @if (saving()) {
+
+              Saving...
+
+            } @else {
+
+              {{ editMode() ? 'Update Lesson' : 'Save Lesson' }}
+
+            }
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
