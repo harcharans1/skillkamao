@@ -1,0 +1,682 @@
+/* ================================
+   DASHBOARD
+================================ */
+
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 24px 80px;
+}
+
+
+/* ================================
+   WELCOME
+================================ */
+
+.welcome-section {
+  margin-bottom: 35px;
+}
+
+.welcome-label,
+.section-label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #6366f1;
+}
+
+.welcome-section h1 {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #111827;
+}
+
+.welcome-text {
+  margin: 12px 0 0;
+  max-width: 650px;
+  color: #6b7280;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+
+/* ================================
+   OVERALL PROGRESS
+================================ */
+
+.overall-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+
+  padding: 30px;
+
+  background: linear-gradient(
+    135deg,
+    #111827,
+    #1f2937
+  );
+
+  border-radius: 24px;
+  color: white;
+
+  box-shadow:
+    0 20px 45px rgba(17, 24, 39, 0.15);
+
+  margin-bottom: 25px;
+}
+
+.overall-left {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.overall-left h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.overall-left p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+
+/* Progress Circle */
+
+.progress-circle {
+  width: 100px;
+  height: 100px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    conic-gradient(
+      #818cf8 calc(var(--progress, 0) * 1%),
+      #374151 0
+    );
+
+  position: relative;
+}
+
+.progress-circle::before {
+  content: "";
+  position: absolute;
+
+  width: 78px;
+  height: 78px;
+
+  border-radius: 50%;
+  background: #111827;
+}
+
+.circle-inner {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circle-inner strong {
+  font-size: 20px;
+}
+
+.circle-inner span {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+
+/* Overall Bar */
+
+.overall-bar {
+  width: 320px;
+}
+
+.overall-bar .progress-bar {
+  margin-bottom: 9px;
+}
+
+.overall-bar > span {
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+
+/* ================================
+   PROGRESS BAR
+================================ */
+
+.progress-bar {
+  width: 100%;
+  height: 9px;
+
+  overflow: hidden;
+
+  background: #e5e7eb;
+  border-radius: 999px;
+}
+
+.overall-card .progress-bar {
+  background: #374151;
+}
+
+.progress-fill {
+  height: 100%;
+  min-width: 0;
+
+  background: linear-gradient(
+    90deg,
+    #6366f1,
+    #8b5cf6
+  );
+
+  border-radius: 999px;
+
+  transition: width 0.5s ease;
+}
+
+
+/* ================================
+   STATS
+================================ */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+
+  margin-bottom: 55px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 22px;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+
+  transition: 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f3f4f6;
+  border-radius: 14px;
+
+  font-size: 23px;
+}
+
+.stat-card strong {
+  display: block;
+
+  font-size: 25px;
+  color: #111827;
+}
+
+.stat-card span {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 13px;
+  color: #6b7280;
+}
+
+
+/* ================================
+   SECTION HEADING
+================================ */
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  font-size: 28px;
+  color: #111827;
+}
+
+.view-all {
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  color: #6366f1;
+}
+
+.view-all:hover {
+  color: #4f46e5;
+}
+
+
+/* ================================
+   MY COURSES
+================================ */
+
+.courses-section {
+  margin-bottom: 60px;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.course-card {
+  padding: 25px;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.09);
+}
+
+.course-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.course-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f3f4f6;
+
+  border-radius: 16px;
+
+  font-size: 28px;
+}
+
+.course-status {
+  padding: 7px 11px;
+
+  border-radius: 999px;
+
+  background: #f3f4f6;
+
+  color: #6b7280;
+
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.course-card h3 {
+  margin: 0 0 7px;
+
+  font-size: 20px;
+  color: #111827;
+}
+
+.course-lesson {
+  margin: 0 0 20px;
+
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.course-progress-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 8px;
+
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.course-progress-info span:first-child {
+  font-weight: 800;
+  color: #6366f1;
+}
+
+.course-bar {
+  margin-bottom: 20px;
+}
+
+.course-button {
+  display: block;
+
+  width: 100%;
+
+  padding: 12px 15px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+  text-decoration: none;
+
+  background: #111827;
+  color: white;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: 0.25s ease;
+}
+
+.course-button:hover {
+  background: #6366f1;
+}
+
+
+/* ================================
+   CONTINUE LEARNING
+================================ */
+
+.continue-section {
+  margin-bottom: 60px;
+}
+
+.continue-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+
+  padding: 26px;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.continue-icon {
+  width: 68px;
+  height: 68px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f3f4f6;
+  border-radius: 18px;
+
+  font-size: 32px;
+}
+
+.continue-content {
+  flex: 1;
+}
+
+.continue-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #6366f1;
+}
+
+.continue-content h3 {
+  margin: 5px 0;
+
+  font-size: 20px;
+  color: #111827;
+}
+
+.continue-content p {
+  margin: 0 0 13px;
+
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.continue-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.continue-progress .progress-bar {
+  max-width: 400px;
+}
+
+.continue-progress span {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6366f1;
+}
+
+.continue-button {
+  padding: 13px 19px;
+
+  flex-shrink: 0;
+
+  text-decoration: none;
+
+  background: #6366f1;
+  color: white;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: 0.25s ease;
+}
+
+.continue-button:hover {
+  background: #4f46e5;
+  transform: translateY(-2px);
+}
+
+
+/* ================================
+   EXPLORE
+================================ */
+
+.explore-section {
+  margin-bottom: 20px;
+}
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.explore-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 21px;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+
+  text-decoration: none;
+
+  transition: 0.25s ease;
+}
+
+.explore-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.explore-icon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f3f4f6;
+
+  border-radius: 14px;
+
+  font-size: 22px;
+}
+
+.explore-card h3 {
+  margin: 0 0 4px;
+
+  font-size: 16px;
+  color: #111827;
+}
+
+.explore-card p {
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.5;
+
+  color: #6b7280;
+}
+
+.explore-card > span {
+  margin-left: auto;
+
+  color: #6366f1;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .explore-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .overall-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .overall-bar {
+    width: 100%;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .dashboard {
+    padding: 35px 16px 60px;
+  }
+
+  .welcome-section h1 {
+    font-size: 30px;
+  }
+
+  .overall-left {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    gap: 12px;
+    flex-direction: column;
+  }
+
+  .continue-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .continue-button {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .continue-progress {
+    width: 100%;
+  }
+
+  .continue-progress .progress-bar {
+    flex: 1;
+  }
+
+}

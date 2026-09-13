@@ -1,0 +1,540 @@
+<div class="lesson-page">
+
+  @if (course()) {
+
+    <!-- TOP SECTION -->
+
+    <section class="lesson-header">
+
+      <div class="lesson-header-left">
+
+        <a
+          routerLink="/courses"
+          class="back-link">
+          ← Back to Courses
+        </a>
+
+        <span class="course-badge">
+          {{ course().level }}
+        </span>
+
+        <h1>
+          {{ course().name }}
+        </h1>
+
+        <p>
+          Continue your learning journey and complete each lesson
+          to build your skills.
+        </p>
+
+      </div>
+
+
+      <div class="lesson-progress-card">
+
+        <div class="progress-info">
+
+          <span>
+            Course Progress
+          </span>
+
+          <strong>
+            {{ progress | number:'1.0-0' }}%
+          </strong>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            [style.width.%]="progress">
+          </div>
+
+        </div>
+
+
+        <small>
+          {{ completedLessons.length }}/{{ totalLessons }}
+          lessons completed
+        </small>
+
+      </div>
+
+    </section>
+
+
+    <!-- MAIN LEARNING AREA -->
+
+    <section class="learning-layout">
+
+
+      <!-- LEFT -->
+
+      <main class="lesson-main">
+
+
+        <!-- VIDEO -->
+
+        <div class="video-card">
+
+          <div class="video-container">
+
+            <video
+              #videoPlayer
+              preload="metadata"
+              (click)="toggleVideo()"
+              (dblclick)="toggleVideo()"
+              (timeupdate)="updateVideoProgress()"
+              (loadedmetadata)="setDuration()"
+              (play)="videoPlaying = true"
+              (pause)="videoPlaying = false"
+              controlsList="nodownload"
+              oncontextmenu="return false">
+
+              <source
+                [src]="currentLessonData?.video_url"
+                type="video/mp4">
+
+              Your browser does not support video playback.
+
+            </video>
+
+
+            @if (!videoPlaying) {
+
+              <button
+                type="button"
+                class="video-play-button"
+                (click)="toggleVideo()">
+
+                ▶
+
+              </button>
+
+            }
+
+          </div>
+
+
+          <!-- VIDEO CONTROLS -->
+
+          <div class="video-controls">
+
+            <button
+              type="button"
+              class="control-button"
+              (click)="toggleVideo()">
+
+              @if (videoPlaying) {
+                ❚❚
+              } @else {
+                ▶
+              }
+
+            </button>
+
+
+            <button
+              type="button"
+              class="control-button"
+              (click)="seek(-10)">
+
+              ↶ 10
+
+            </button>
+
+
+            <div class="video-progress">
+
+              <input
+                type="range"
+                min="0"
+                max="100"
+                [value]="videoProgress"
+                (input)="setVideoProgress($event)">
+
+            </div>
+
+
+            <button
+              type="button"
+              class="control-button"
+              (click)="seek(10)">
+
+              10 ↷
+
+            </button>
+
+
+            <button
+              type="button"
+              class="control-button"
+              (click)="toggleFullscreen()">
+
+              ⛶
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- LESSON INFO -->
+
+        @if (currentLessonData) {
+
+          <div class="lesson-info">
+
+            <div class="lesson-title-row">
+
+              <div>
+
+                <span class="lesson-number">
+                  LESSON {{ currentLesson }}
+                </span>
+
+                <h2>
+                  {{ currentLessonData.title }}
+                </h2>
+
+              </div>
+
+
+              @if (completed) {
+
+                <span class="completed-badge">
+                  ✓ Completed
+                </span>
+
+              }
+
+            </div>
+
+
+            <div class="lesson-meta">
+
+              <span>
+                ⏱ {{ currentLessonData.duration }}
+              </span>
+
+              <span>
+                📚 {{ currentLesson }}
+                of
+                {{ totalLessons }}
+              </span>
+
+            </div>
+
+
+            <p class="lesson-description">
+
+              In this lesson, you will learn
+              <strong>
+                {{ currentLessonData.title }}
+              </strong>
+              and understand the important concepts needed
+              to continue your learning journey.
+
+            </p>
+
+          </div>
+
+        }
+
+
+        <!-- ACTIONS -->
+
+        <div class="lesson-actions">
+
+          <button
+            type="button"
+            class="previous-button"
+            [disabled]="currentLesson === 1"
+            (click)="previousLesson()">
+
+            ← Previous
+
+          </button>
+
+
+          @if (!completed) {
+
+            <button
+              type="button"
+              class="complete-button"
+              (click)="markComplete()">
+
+              ✓ Mark Complete
+
+            </button>
+
+          } @else {
+
+            <button
+              type="button"
+              class="complete-button completed">
+
+              ✓ Completed
+
+            </button>
+
+          }
+
+
+          <button
+            type="button"
+            class="next-button"
+            [disabled]="currentLesson === totalLessons"
+            (click)="nextLesson()">
+
+            Next Lesson →
+
+          </button>
+
+        </div>
+
+
+        <!-- LEARNING CONTENT -->
+
+        <section class="content-card">
+
+          <div class="content-heading">
+
+            <span>
+              LEARNING CONTENT
+            </span>
+
+            <h2>
+              What You'll Learn
+            </h2>
+
+          </div>
+
+
+          <div class="learning-points">
+
+            <div class="learning-point">
+
+              <span>✓</span>
+
+              <p>
+                Understand the key concepts covered in this lesson.
+              </p>
+
+            </div>
+
+
+            <div class="learning-point">
+
+              <span>✓</span>
+
+              <p>
+                Follow practical examples and apply what you learn.
+              </p>
+
+            </div>
+
+
+            <div class="learning-point">
+
+              <span>✓</span>
+
+              <p>
+                Build confidence through hands-on practice.
+              </p>
+
+            </div>
+
+
+            <div class="learning-point">
+
+              <span>✓</span>
+
+              <p>
+                Prepare yourself for the next lesson.
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+
+
+      <!-- RIGHT SIDEBAR -->
+
+      <aside class="lesson-sidebar">
+
+        <div class="sidebar-card">
+
+          <div class="sidebar-heading">
+
+            <div>
+
+              <span>
+                COURSE CONTENT
+              </span>
+
+              <h3>
+                Lessons
+              </h3>
+
+            </div>
+
+            <strong>
+              {{ completedLessons.length }}/{{ totalLessons }}
+            </strong>
+
+          </div>
+
+
+          <div class="sidebar-progress">
+
+            <div class="progress-bar">
+
+              <div
+                class="progress-fill"
+                [style.width.%]="progress">
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="lesson-list">
+
+            @for (
+              lesson of lessons();
+              track lesson.id
+            ) {
+
+              <button
+                type="button"
+                class="lesson-item"
+
+                [class.active]="
+                  currentLesson === lesson.lesson_number
+                "
+
+                [class.completed]="
+                  completedLessons.includes(
+                    lesson.lesson_number
+                  )
+                "
+
+                (click)="
+                  selectLesson(
+                    lesson.lesson_number
+                  )
+                ">
+
+
+                <div class="lesson-item-number">
+
+                  @if (
+                    completedLessons.includes(
+                      lesson.lesson_number
+                    )
+                  ) {
+
+                    ✓
+
+                  } @else {
+
+                    {{ lesson.lesson_number }}
+
+                  }
+
+                </div>
+
+
+                <div class="lesson-item-content">
+
+                  <span>
+                    Lesson {{ lesson.lesson_number }}
+                  </span>
+
+                  <strong>
+                    {{ lesson.title }}
+                  </strong>
+
+                  <small>
+                    {{ lesson.duration }}
+                  </small>
+
+                </div>
+
+              </button>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- COURSE INFO -->
+
+        <div class="sidebar-info">
+
+          <div class="sidebar-info-icon">
+            {{ course().icon }}
+          </div>
+
+          <div>
+
+            <span>
+              COURSE
+            </span>
+
+            <strong>
+              {{ course().name }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+
+  } @else {
+
+
+    <!-- LOADING -->
+
+    <section class="not-found">
+
+      <div class="not-found-icon">
+        📚
+      </div>
+
+      <h1>
+        Loading Course...
+      </h1>
+
+      <p>
+        Preparing your lessons...
+      </p>
+
+      <a
+        routerLink="/courses"
+        class="back-courses-button">
+
+        ← Browse Courses
+
+      </a>
+
+    </section>
+
+  }
+
+</div>

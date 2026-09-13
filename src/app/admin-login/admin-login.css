@@ -1,0 +1,163 @@
+.admin-login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  background: #f8fafc;
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 430px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.09);
+}
+
+.admin-logo {
+  display: block;
+  margin-bottom: 30px;
+  color: #111827;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.admin-logo span {
+  color: #6366f1;
+}
+
+.admin-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: #eef2ff;
+  font-size: 27px;
+}
+
+.heading span {
+  color: #6366f1;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.heading h1 {
+  margin: 8px 0;
+  color: #111827;
+  font-size: 32px;
+}
+
+.heading p {
+  margin: 0 0 28px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 13px 14px;
+  box-sizing: border-box;
+  border: 1px solid #dbe1ea;
+  border-radius: 10px;
+  outline: none;
+  color: #111827;
+  background: #fff;
+  font-size: 13px;
+  transition: 0.2s ease;
+}
+
+.form-group input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
+}
+
+.message {
+  padding: 11px 13px;
+  margin-bottom: 16px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.message.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+}
+
+.message.success {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #059669;
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #111827;
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-1px);
+  background: #6366f1;
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+}
+
+.back-home {
+  display: block;
+  margin-top: 22px;
+  color: #64748b;
+  text-align: center;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.back-home:hover {
+  color: #6366f1;
+}
+
+@media (max-width: 500px) {
+
+  .admin-login-card {
+    padding: 28px 22px;
+    border-radius: 18px;
+  }
+
+  .heading h1 {
+    font-size: 27px;
+  }
+
+}

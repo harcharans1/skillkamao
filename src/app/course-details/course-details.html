@@ -1,0 +1,193 @@
+@if (course()) {
+
+<section class="course-details-page">
+
+  <!-- HERO -->
+
+  <div class="course-details-container">
+
+    <div class="course-icon">
+      {{ course().icon }}
+    </div>
+
+    <div class="course-info">
+
+      <span class="level">
+        {{ course().level }}
+      </span>
+
+      <h1>
+        {{ course().name }}
+      </h1>
+
+      <p>
+        {{ course().description }}
+      </p>
+
+      <div class="course-meta">
+
+        <span>
+          ⏱ {{ course().duration }}
+        </span>
+
+        <span>
+          ⭐ {{ course().rating }}
+        </span>
+
+        <span>
+          📚 {{ lessons().length }} Lessons
+        </span>
+
+      </div>
+
+      <button
+        [routerLink]="['/lesson', course().name]">
+        Start Learning →
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- WHAT YOU WILL LEARN -->
+
+  <div class="learning-section">
+
+    <div class="section-heading">
+
+      <span>COURSE OVERVIEW</span>
+
+      <h2>What You'll Learn</h2>
+
+      <p>
+        Build practical skills through simple,
+        project-based learning.
+      </p>
+
+    </div>
+
+
+    <div class="learning-grid">
+
+      <div class="learning-item">
+        <strong>✓</strong>
+        <div>
+          <h3>Practical Skills</h3>
+          <p>Learn skills you can actually use in real projects.</p>
+        </div>
+      </div>
+
+      <div class="learning-item">
+        <strong>✓</strong>
+        <div>
+          <h3>Step-by-Step Learning</h3>
+          <p>Start from the basics and gradually build your knowledge.</p>
+        </div>
+      </div>
+
+      <div class="learning-item">
+        <strong>✓</strong>
+        <div>
+          <h3>Real Projects</h3>
+          <p>Practice what you learn by creating useful projects.</p>
+        </div>
+      </div>
+
+      <div class="learning-item">
+        <strong>✓</strong>
+        <div>
+          <h3>Career Growth</h3>
+          <p>Develop skills that can help you create better opportunities.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- LESSONS -->
+
+  <div class="lessons-section">
+
+    <div class="section-heading">
+
+      <span>COURSE CONTENT</span>
+
+      <h2>Course Lessons</h2>
+
+      <p>
+        Follow the lessons in order and learn at your own pace.
+      </p>
+
+    </div>
+
+
+    <div class="lessons-list">
+
+      @for (lesson of lessons(); track lesson.id) {
+
+        <div class="lesson-card">
+
+          <div class="lesson-number">
+            {{ lesson.lesson_number }}
+          </div>
+
+          <div class="lesson-info">
+
+            <h3>
+              {{ lesson.title }}
+            </h3>
+
+            <p>
+              🎥 Video Lesson
+              <span>•</span>
+              ⏱ {{ lesson.duration }}
+            </p>
+
+          </div>
+
+          <div class="lesson-action">
+            <span>Lesson {{ lesson.lesson_number }}</span>
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    @if (lessons().length > 0) {
+
+      <div class="lessons-button">
+
+        <button
+          [routerLink]="['/lesson', course().name]">
+          Start Course →
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>
+
+}
+
+@else {
+
+<section class="course-loading">
+
+  <div class="loading-spinner"></div>
+
+  <h2>Loading course...</h2>
+
+  <p>Please wait...</p>
+
+</section>
+
+}

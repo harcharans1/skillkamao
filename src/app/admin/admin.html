@@ -1,0 +1,433 @@
+<div class="admin-page">
+
+  <!-- SIDEBAR -->
+
+  <aside class="admin-sidebar">
+
+    <a routerLink="/" class="admin-logo">
+      Skill<span>Kamao</span>
+    </a>
+
+    <div class="admin-label">
+      ADMIN PANEL
+    </div>
+
+    <nav class="admin-nav">
+
+      <a routerLink="/admin" class="active">
+        <span>📊</span>
+        Dashboard
+      </a>
+
+      <a routerLink="/admin-courses">
+        <span>📚</span>
+        Courses
+      </a>
+
+      <a href="#">
+        <span>👨‍🎓</span>
+        Students
+      </a>
+
+      <a routerLink="/certificates">
+        <span>🏆</span>
+        Certificates
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <button type="button" (click)="logout()">
+
+        <span>🚪</span>
+        Logout
+
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="admin-main">
+
+    <header class="admin-header">
+
+      <div>
+
+        <span class="header-label">
+          ADMIN DASHBOARD
+        </span>
+
+        <h1>
+          Welcome back 👋
+        </h1>
+
+        <p>
+          Manage SkillKamao and keep your learning platform growing.
+        </p>
+
+      </div>
+
+      <div class="admin-profile">
+
+        <div class="profile-icon">
+          🛡️
+        </div>
+
+        <div>
+          <strong>
+            {{ adminName }}
+          </strong>
+
+          <span>
+            Administrator
+          </span>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- STATS -->
+
+    <section class="stats-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          👨‍🎓
+        </div>
+
+        <div>
+          <strong>
+            {{ totalStudents }}
+          </strong>
+
+          <span>
+            Total Students
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          📚
+        </div>
+
+        <div>
+          <strong>
+            {{ totalCourses }}
+          </strong>
+
+          <span>
+            Total Courses
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          ⏳
+        </div>
+
+        <div>
+          <strong>
+            {{ pendingCertificates }}
+          </strong>
+
+          <span>
+            Pending Certificates
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          🏆
+        </div>
+
+        <div>
+          <strong>
+            {{ completedCourses }}
+          </strong>
+
+          <span>
+            Certificates Issued
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <section class="section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span>
+            MANAGEMENT
+          </span>
+
+          <h2>
+            Quick Actions
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="action-grid">
+
+        <a href="#" class="action-card">
+
+          <div class="action-icon">
+            📚
+          </div>
+
+          <div>
+
+            <h3>
+              Manage Courses
+            </h3>
+
+            <p>
+              Add, edit and manage your courses and lessons.
+            </p>
+
+          </div>
+
+          <strong>
+            →
+          </strong>
+
+        </a>
+
+
+        <a href="#" class="action-card">
+
+          <div class="action-icon">
+            🎥
+          </div>
+
+          <div>
+
+            <h3>
+              Manage Lessons
+            </h3>
+
+            <p>
+              Add lessons, durations and course videos.
+            </p>
+
+          </div>
+
+          <strong>
+            →
+          </strong>
+
+        </a>
+
+
+        <a routerLink="/admin-courses" class="action-card">
+
+          <div class="action-icon">
+            👨‍🎓
+          </div>
+
+          <div>
+
+            <h3>
+              Students
+            </h3>
+
+            <p>
+              View students and monitor their learning progress.
+            </p>
+
+          </div>
+
+          <strong>
+            →
+          </strong>
+
+        </a>
+
+
+        <a routerLink="/certificates" class="action-card">
+
+          <div class="action-icon">
+            🏆
+          </div>
+
+          <div>
+
+            <h3>
+              Certificate Requests
+            </h3>
+
+            <p>
+              Review pending certificate requests.
+            </p>
+
+          </div>
+
+          <strong>
+            →
+          </strong>
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- PLATFORM OVERVIEW -->
+
+    <section class="section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span>
+            PLATFORM
+          </span>
+
+          <h2>
+            SkillKamao Overview
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="overview-card">
+
+        <div class="overview-item">
+
+          <span>📚</span>
+
+          <div>
+
+            <strong>
+              Course Library
+            </strong>
+
+            <p>
+              4 active learning courses
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="overview-item">
+
+          <span>🎥</span>
+
+          <div>
+
+            <strong>
+              Video Lessons
+            </strong>
+
+            <p>
+              16 learning videos available
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="overview-item">
+
+          <span>🏆</span>
+
+          <div>
+
+            <strong>
+              Certificates
+            </strong>
+
+            <p>
+              Admin approval required
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="overview-item">
+
+          <span>🚀</span>
+
+          <div>
+
+            <strong>
+              Learning Platform
+            </strong>
+
+            <p>
+              Learn · Practice · Build · Grow
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- NOTICE -->
+
+    <section class="admin-notice">
+
+      <div class="notice-icon">
+        💡
+      </div>
+
+      <div>
+
+        <strong>
+          Admin Control Center
+        </strong>
+
+        <p>
+          Course management, student management and certificate
+          approval tools will be connected here next.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

@@ -1,0 +1,970 @@
+/* ================================
+   CERTIFICATES PAGE
+================================ */
+
+.certificates-page {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+
+/* ================================
+   HERO
+================================ */
+
+.certificates-hero {
+  padding: 85px 24px 80px;
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(99, 102, 241, 0.14),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(139, 92, 246, 0.12),
+      transparent 35%
+    ),
+    #ffffff;
+}
+
+.hero-content {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background: #eef2ff;
+
+  color: #6366f1;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.hero-content h1 {
+  margin: 22px 0 18px;
+
+  color: #111827;
+
+  font-size: 54px;
+
+  line-height: 1.1;
+
+  letter-spacing: -2px;
+}
+
+.hero-content h1 span {
+  color: #6366f1;
+}
+
+.hero-content p {
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  color: #6b7280;
+
+  font-size: 17px;
+
+  line-height: 1.7;
+}
+
+
+/* ================================
+   STATS
+================================ */
+
+.certificate-stats {
+  max-width: 1000px;
+
+  margin: -28px auto 0;
+
+  padding: 0 24px;
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 15px;
+}
+
+.stat-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 22px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: #f3f4f6;
+
+  font-size: 23px;
+}
+
+.stat-card strong {
+  display: block;
+
+  color: #111827;
+
+  font-size: 24px;
+}
+
+.stat-card span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #6b7280;
+
+  font-size: 11px;
+}
+
+
+/* ================================
+   COMMON
+================================ */
+
+.certificates-section,
+.upcoming-section,
+.why-section {
+  max-width: 1150px;
+
+  margin: 0 auto;
+
+  padding: 85px 24px;
+}
+
+.section-heading {
+  margin-bottom: 32px;
+}
+
+.section-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #6366f1;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.section-heading h2 {
+  margin: 0 0 8px;
+
+  color: #111827;
+
+  font-size: 32px;
+}
+
+.section-heading p {
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* ================================
+   EARNED
+================================ */
+
+.earned-grid {
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  gap: 25px;
+}
+
+.certificate-card {
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ================================
+   CERTIFICATE PREVIEW
+================================ */
+
+.certificate-preview {
+  position: relative;
+
+  min-height: 330px;
+
+  padding: 30px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef2ff,
+      #faf5ff
+    );
+}
+
+.certificate-pattern {
+  position: absolute;
+
+  inset: 15px;
+
+  border: 1px solid #c7d2fe;
+
+  border-radius: 10px;
+
+  pointer-events: none;
+}
+
+.certificate-pattern::before,
+.certificate-pattern::after {
+  content: "";
+
+  position: absolute;
+
+  width: 35px;
+  height: 35px;
+
+  border: 2px solid #a5b4fc;
+}
+
+.certificate-pattern::before {
+  top: -2px;
+  left: -2px;
+
+  border-right: none;
+  border-bottom: none;
+}
+
+.certificate-pattern::after {
+  right: -2px;
+  bottom: -2px;
+
+  border-left: none;
+  border-top: none;
+}
+
+.certificate-content {
+  position: relative;
+
+  z-index: 1;
+
+  max-width: 560px;
+
+  text-align: center;
+}
+
+.certificate-small {
+  color: #6366f1;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 3px;
+}
+
+.certificate-trophy {
+  margin: 15px 0;
+
+  font-size: 35px;
+}
+
+.certificate-content h3 {
+  margin: 0 0 10px;
+
+  color: #111827;
+
+  font-family: Georgia, serif;
+
+  font-size: 27px;
+}
+
+.certificate-content p {
+  margin: 0 auto 9px;
+
+  max-width: 430px;
+
+  color: #6b7280;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+.certificate-content > strong {
+  display: block;
+
+  color: #4338ca;
+
+  font-family: Georgia, serif;
+
+  font-size: 23px;
+}
+
+.certificate-line {
+  width: 150px;
+
+  height: 1px;
+
+  margin: 15px auto;
+
+  background: #a5b4fc;
+}
+
+.certificate-content small {
+  color: #9ca3af;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+
+/* ================================
+   DETAILS
+================================ */
+
+.certificate-details {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 22px 25px 12px;
+}
+
+.certificate-label {
+  color: #9ca3af;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.certificate-details h3 {
+  margin: 4px 0 0;
+
+  color: #111827;
+
+  font-size: 18px;
+}
+
+.grade {
+  padding: 7px 10px;
+
+  border-radius: 999px;
+
+  background: #ecfdf5;
+
+  color: #059669;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+
+/* ================================
+   META
+================================ */
+
+.certificate-meta {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 20px;
+
+  padding: 15px 25px 20px;
+}
+
+.certificate-meta div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.certificate-meta span {
+  color: #9ca3af;
+
+  font-size: 10px;
+}
+
+.certificate-meta strong {
+  color: #374151;
+
+  font-size: 11px;
+}
+
+
+/* ================================
+   ACTIONS
+================================ */
+
+.certificate-actions {
+  display: flex;
+
+  gap: 10px;
+
+  padding: 0 25px 25px;
+}
+
+.certificate-actions button {
+  flex: 1;
+
+  height: 44px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background: #111827;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.certificate-actions button:hover {
+  background: #6366f1;
+}
+
+.certificate-actions .download-button {
+  background: #f3f4f6;
+
+  color: #374151;
+}
+
+.certificate-actions .download-button:hover {
+  background: #e5e7eb;
+}
+
+
+/* ================================
+   UPCOMING
+================================ */
+
+.upcoming-section {
+  max-width: none;
+
+  padding-left: max(24px, calc((100vw - 1102px) / 2));
+  padding-right: max(24px, calc((100vw - 1102px) / 2));
+
+  background: #ffffff;
+}
+
+.upcoming-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+.upcoming-card {
+  padding: 23px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 19px;
+
+  background: #f8fafc;
+
+  transition: 0.25s ease;
+}
+
+.upcoming-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.06);
+}
+
+.upcoming-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 17px;
+}
+
+.upcoming-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  font-size: 24px;
+}
+
+.upcoming-top > span {
+  color: #9ca3af;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+.upcoming-card h3 {
+  margin: 0 0 7px;
+
+  color: #111827;
+
+  font-size: 17px;
+}
+
+.upcoming-card > p {
+  min-height: 38px;
+
+  margin: 0 0 18px;
+
+  color: #6b7280;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+.upcoming-progress-info {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+
+  color: #6b7280;
+
+  font-size: 11px;
+}
+
+.upcoming-progress-info strong {
+  color: #6366f1;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 7px;
+
+  margin-bottom: 17px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #e5e7eb;
+}
+
+.progress-fill {
+  height: 100%;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    #6366f1,
+    #8b5cf6
+  );
+}
+
+.upcoming-card a {
+  color: #6366f1;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+
+/* ================================
+   WHY
+================================ */
+
+.why-section {
+  text-align: center;
+}
+
+.why-heading {
+  max-width: 650px;
+
+  margin: 0 auto 40px;
+}
+
+.why-heading h2 {
+  margin: 0 0 10px;
+
+  color: #111827;
+
+  font-size: 34px;
+}
+
+.why-heading p {
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.why-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+.why-card {
+  padding: 28px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  text-align: left;
+
+  transition: 0.25s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.07);
+}
+
+.why-card > div {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 17px;
+
+  border-radius: 14px;
+
+  background: #f3f4f6;
+
+  font-size: 22px;
+}
+
+.why-card h3 {
+  margin: 0 0 8px;
+
+  color: #111827;
+
+  font-size: 17px;
+}
+
+.why-card p {
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* ================================
+   CTA
+================================ */
+
+.certificate-cta {
+  max-width: 1050px;
+
+  margin: 70px auto;
+
+  padding: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 25px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #111827,
+      #312e81
+    );
+
+  color: #ffffff;
+}
+
+.certificate-cta > div span {
+  color: #a5b4fc;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.certificate-cta h2 {
+  margin: 8px 0;
+
+  font-size: 28px;
+}
+
+.certificate-cta p {
+  margin: 0;
+
+  color: #cbd5e1;
+
+  font-size: 13px;
+}
+
+.certificate-cta > a {
+  flex-shrink: 0;
+
+  padding: 13px 19px;
+
+  border-radius: 11px;
+
+  background: #ffffff;
+
+  color: #111827;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  transition: 0.25s ease;
+}
+
+.certificate-cta > a:hover {
+  transform: translateY(-2px);
+
+  background: #eef2ff;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 850px) {
+
+  .upcoming-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .certificate-cta {
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .certificates-hero {
+    padding: 65px 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 39px;
+  }
+
+  .certificate-stats {
+    grid-template-columns: 1fr;
+
+    padding: 0 18px;
+  }
+
+  .certificates-section,
+  .why-section {
+    padding: 65px 18px;
+  }
+
+  .upcoming-section {
+    padding: 65px 18px;
+  }
+
+  .upcoming-grid,
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-preview {
+    min-height: 290px;
+
+    padding: 20px;
+  }
+
+  .certificate-content h3 {
+    font-size: 22px;
+  }
+
+  .certificate-content > strong {
+    font-size: 19px;
+  }
+
+  .certificate-details {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .certificate-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-actions {
+    flex-direction: column;
+  }
+
+  .certificate-cta {
+    margin: 40px 18px;
+
+    padding: 30px;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .certificate-cta > a {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    text-align: center;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .hero-content h1 {
+    font-size: 32px;
+  }
+
+  .certificate-preview {
+    min-height: 260px;
+  }
+
+  .certificate-content h3 {
+    font-size: 19px;
+  }
+
+  .certificate-content p {
+    font-size: 10px;
+  }
+
+  .certificate-content > strong {
+    font-size: 17px;
+  }
+
+}

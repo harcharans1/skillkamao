@@ -1,0 +1,283 @@
+<div class="roadmaps-page">
+
+  <!-- Hero -->
+  <section class="roadmaps-hero">
+
+    <div class="hero-content">
+
+      <span class="hero-badge">
+        🚀 CAREER ROADMAPS
+      </span>
+
+      <h1>
+        Choose Your Skill.<br>
+        <span>Build Your Future.</span>
+      </h1>
+
+      <p>
+        Follow step-by-step learning paths designed to help you
+        learn a skill, build real projects and move towards earning.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- Roadmaps -->
+  <section class="roadmaps-section">
+
+    <div class="section-heading">
+
+      <div>
+        <span class="section-label">
+          LEARNING PATHS
+        </span>
+
+        <h2>
+          Choose Your Roadmap
+        </h2>
+
+        <p>
+          Start from the basics and progress towards professional-level skills.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="roadmap-grid">
+
+      @for (roadmap of roadmaps; track roadmap.title) {
+
+        <div class="roadmap-card">
+
+          <!-- Top -->
+          <div class="roadmap-top">
+
+            <div class="roadmap-icon">
+              {{ roadmap.icon }}
+            </div>
+
+            <span class="roadmap-level">
+              {{ roadmap.level }}
+            </span>
+
+          </div>
+
+
+          <!-- Content -->
+          <h3>
+            {{ roadmap.title }}
+          </h3>
+
+          <p class="roadmap-description">
+            {{ roadmap.description }}
+          </p>
+
+
+          <!-- Skills -->
+          <div class="skills-list">
+
+            @for (skill of roadmap.skills; track skill) {
+
+              <span>
+                {{ skill }}
+              </span>
+
+            }
+
+          </div>
+
+
+          <!-- Progress Path -->
+          <div class="learning-path">
+
+            <div class="path-step active">
+              <span>1</span>
+              <small>Learn</small>
+            </div>
+
+            <div class="path-line"></div>
+
+            <div class="path-step">
+              <span>2</span>
+              <small>Practice</small>
+            </div>
+
+            <div class="path-line"></div>
+
+            <div class="path-step">
+              <span>3</span>
+              <small>Build</small>
+            </div>
+
+            <div class="path-line"></div>
+
+            <div class="path-step">
+              <span>4</span>
+              <small>Earn</small>
+            </div>
+
+          </div>
+
+
+          <!-- Bottom -->
+          <div class="roadmap-bottom">
+
+            <div class="duration">
+              <span>⏱️</span>
+              {{ roadmap.duration }}
+            </div>
+
+            <button>
+              Start Roadmap →
+            </button>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- How It Works -->
+  <section class="roadmap-process">
+
+    <div class="process-heading">
+
+      <span class="section-label">
+        HOW IT WORKS
+      </span>
+
+      <h2>
+        One Skill. Four Simple Steps.
+      </h2>
+
+      <p>
+        Our roadmaps keep your learning journey simple and focused.
+      </p>
+
+    </div>
+
+
+    <div class="process-grid">
+
+      <div class="process-card">
+
+        <div class="process-number">
+          01
+        </div>
+
+        <div class="process-icon">
+          📚
+        </div>
+
+        <h3>
+          Learn
+        </h3>
+
+        <p>
+          Understand the fundamentals and learn the right tools.
+        </p>
+
+      </div>
+
+
+      <div class="process-card">
+
+        <div class="process-number">
+          02
+        </div>
+
+        <div class="process-icon">
+          🧠
+        </div>
+
+        <h3>
+          Practice
+        </h3>
+
+        <p>
+          Practice your skills with exercises and challenges.
+        </p>
+
+      </div>
+
+
+      <div class="process-card">
+
+        <div class="process-number">
+          03
+        </div>
+
+        <div class="process-icon">
+          🚀
+        </div>
+
+        <h3>
+          Build
+        </h3>
+
+        <p>
+          Create real-world projects and build your portfolio.
+        </p>
+
+      </div>
+
+
+      <div class="process-card">
+
+        <div class="process-number">
+          04
+        </div>
+
+        <div class="process-icon">
+          💰
+        </div>
+
+        <h3>
+          Earn
+        </h3>
+
+        <p>
+          Use your skills to find opportunities and start earning.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+  <section class="roadmap-cta">
+
+    <div>
+
+      <span>
+        READY TO START?
+      </span>
+
+      <h2>
+        Your Skill Journey Starts Here.
+      </h2>
+
+      <p>
+        Choose a roadmap and take your first step today.
+      </p>
+
+    </div>
+
+    <a href="/courses">
+      Explore Courses →
+    </a>
+
+  </section>
+
+</div>

@@ -1,0 +1,156 @@
+<nav class="navbar">
+
+  <!-- Logo -->
+  <a routerLink="/" class="logo" (click)="closeMobileMenu()">
+
+    Skill<span>Kamao</span>
+
+  </a>
+
+
+  <!-- Desktop Links -->
+  <div class="nav-links">
+
+    <a routerLink="/">
+      Home
+    </a>
+
+    <a routerLink="/skills">
+      Skills
+    </a>
+
+    <a routerLink="/courses">
+      Courses
+    </a>
+
+    <a routerLink="/roadmaps">
+      Roadmaps
+    </a>
+
+    <a routerLink="/about">
+      About
+    </a>
+
+  </div>
+
+
+  <!-- Desktop Actions -->
+  <div class="nav-actions">
+
+  @if (auth.isLoggedIn()) {
+
+    <span class="user-name">
+      Hi, {{ currentUser?.fullName }}
+    </span>
+
+    <button
+      class="login-btn"
+      routerLink="/dashboard">
+      Dashboard
+    </button>
+
+    <button
+      class="signup-btn"
+      type="button"
+      (click)="logout()">
+      Logout
+    </button>
+
+  } @else {
+
+    <button
+      class="login-btn"
+      routerLink="/login">
+      Login
+    </button>
+
+    <button
+      class="signup-btn"
+      routerLink="/signup">
+      Get Started
+    </button>
+
+  }
+
+</div>
+
+
+  <!-- Mobile Menu Button -->
+  <button class="menu-button" type="button" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+
+    @if (mobileMenuOpen) {
+    ✕
+    } @else {
+    ☰
+    }
+
+  </button>
+
+
+  <!-- Mobile Menu -->
+  @if (mobileMenuOpen) {
+
+  <div class="mobile-menu">
+
+    <a routerLink="/" (click)="closeMobileMenu()">
+
+      Home
+
+    </a>
+
+    <a routerLink="/skills" (click)="closeMobileMenu()">
+
+      Skills
+
+    </a>
+
+    <a routerLink="/courses" (click)="closeMobileMenu()">
+
+      Courses
+
+    </a>
+
+    <a routerLink="/roadmaps" (click)="closeMobileMenu()">
+
+      Roadmaps
+
+    </a>
+
+    <a routerLink="/about" (click)="closeMobileMenu()">
+
+      About
+
+    </a>
+
+
+    <div class="mobile-actions">
+
+      @if (auth.isLoggedIn()) {
+
+      <button routerLink="/dashboard" (click)="closeMobileMenu()">
+        Dashboard
+      </button>
+
+      <button type="button" (click)="logout()">
+        Logout
+      </button>
+
+      } @else {
+
+      <button routerLink="/login" (click)="closeMobileMenu()">
+        Login
+      </button>
+
+      <button routerLink="/signup" (click)="closeMobileMenu()">
+        Get Started
+      </button>
+
+      }
+
+    </div>
+
+  </div>
+
+  }
+
+</nav>

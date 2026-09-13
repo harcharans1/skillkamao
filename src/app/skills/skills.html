@@ -1,0 +1,42 @@
+<section class="skills-page">
+
+  <div class="skills-header">
+    <p>EXPLORE SKILLS</p>
+
+    <h1>Choose Your Skill</h1>
+
+    <span>
+      Learn practical skills that can help you build,
+      create and grow.
+    </span>
+  </div>
+
+  <div class="skills-grid">
+
+    @for (skill of skills; track skill.name) {
+
+      <div class="skill-card">
+
+        <div class="icon">
+          {{ skill.icon }}
+        </div>
+
+        <h2>
+          {{ skill.name }}
+        </h2>
+
+        <p>
+          {{ skill.description }}
+        </p>
+
+        <button>
+          View Courses →
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

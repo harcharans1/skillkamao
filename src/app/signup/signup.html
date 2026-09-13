@@ -1,0 +1,308 @@
+<div class="auth-page">
+
+  <!-- ================================
+       LEFT BRAND SECTION
+  ================================= -->
+
+  <section class="auth-brand">
+
+    <div class="brand-content">
+
+      <a
+        routerLink="/"
+        class="brand-logo">
+
+        Skill<span>Kamao</span>
+
+      </a>
+
+
+      <span class="brand-badge">
+        START YOUR JOURNEY
+      </span>
+
+
+      <h1>
+        Learn skills.<br>
+        Build your future.
+      </h1>
+
+
+      <p>
+        Create your SkillKamao account and start learning
+        practical skills that can create new opportunities.
+      </p>
+
+
+      <div class="brand-features">
+
+        <div>
+
+          <span>✓</span>
+
+          <p>
+            Learn practical skills
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <span>✓</span>
+
+          <p>
+            Build real-world projects
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <span>✓</span>
+
+          <p>
+            Grow your opportunities
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================================
+       RIGHT FORM SECTION
+  ================================= -->
+
+  <section class="auth-form-section">
+
+    <div class="auth-card">
+
+
+      <!-- Heading -->
+
+      <div class="form-heading">
+
+        <span>
+          CREATE ACCOUNT
+        </span>
+
+        <h2>
+          Join SkillKamao
+        </h2>
+
+        <p>
+          Create your account and start your learning journey.
+        </p>
+
+      </div>
+
+
+      <!-- Social Buttons -->
+
+      <div class="social-auth">
+
+        <button type="button">
+
+          <strong>
+            G
+          </strong>
+
+          Continue with Google
+
+        </button>
+
+
+        <button type="button">
+
+          <strong>
+            f
+          </strong>
+
+          Continue with Facebook
+
+        </button>
+
+      </div>
+
+
+      <!-- Divider -->
+
+      <div class="divider">
+
+        <span>
+          OR
+        </span>
+
+      </div>
+
+
+      <!-- Form -->
+
+      <form
+        #signupForm="ngForm"
+        (ngSubmit)="createAccount()">
+
+
+        <!-- Full Name -->
+
+        <div class="form-group">
+
+          <label>
+            Full Name
+          </label>
+
+          <input
+            type="text"
+            name="fullName"
+            [(ngModel)]="fullName"
+            placeholder="Enter your full name"
+            autocomplete="name">
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="form-group">
+
+          <label>
+            Email Address
+          </label>
+
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            placeholder="you@example.com"
+            autocomplete="email">
+
+        </div>
+
+
+        <!-- Password -->
+
+        <div class="form-group">
+
+          <label>
+            Password
+          </label>
+
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            placeholder="Create a password"
+            autocomplete="new-password">
+
+        </div>
+
+
+        <!-- Confirm Password -->
+
+        <div class="form-group">
+
+          <label>
+            Confirm Password
+          </label>
+
+          <input
+            type="password"
+            name="confirmPassword"
+            [(ngModel)]="confirmPassword"
+            placeholder="Confirm your password"
+            autocomplete="new-password">
+
+        </div>
+
+
+        <!-- Error Message -->
+
+        @if (errorMessage) {
+
+          <div class="form-message error">
+
+            {{ errorMessage }}
+
+          </div>
+
+        }
+
+
+        <!-- Success Message -->
+
+        @if (successMessage) {
+
+          <div class="form-message success">
+
+            {{ successMessage }}
+
+          </div>
+
+        }
+
+
+        <!-- Terms -->
+
+        <label class="terms">
+
+          <input
+            type="checkbox"
+            name="terms"
+            [(ngModel)]="termsAccepted">
+
+          <span>
+
+            I agree to the
+
+            <a href="#">
+              Terms & Conditions
+            </a>
+
+            and
+
+            <a href="#">
+              Privacy Policy
+            </a>.
+
+          </span>
+
+        </label>
+
+
+        <!-- Submit -->
+
+        <button
+          type="submit"
+          class="submit-button">
+
+          Create Account →
+
+        </button>
+
+
+      </form>
+
+
+      <!-- Login -->
+
+      <p class="auth-switch">
+
+        Already have an account?
+
+        <a routerLink="/login">
+          Login
+        </a>
+
+      </p>
+
+    </div>
+
+  </section>
+
+</div>

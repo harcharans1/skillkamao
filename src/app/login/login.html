@@ -1,0 +1,183 @@
+<div class="auth-page">
+
+  <section class="auth-brand">
+
+    <div class="brand-content">
+
+      <a routerLink="/" class="brand-logo">
+        Skill<span>Kamao</span>
+      </a>
+
+      <span class="brand-badge">
+        WELCOME BACK
+      </span>
+
+      <h1>
+        Keep learning.<br>
+        Keep growing.
+      </h1>
+
+      <p>
+        Login to your SkillKamao account and continue
+        building practical skills for your future.
+      </p>
+
+      <div class="brand-features">
+
+        <div>
+          <span>✓</span>
+          <p>Continue your courses</p>
+        </div>
+
+        <div>
+          <span>✓</span>
+          <p>Track your learning progress</p>
+        </div>
+
+        <div>
+          <span>✓</span>
+          <p>Build skills and opportunities</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="auth-form-section">
+
+    <div class="auth-card">
+
+      <div class="form-heading">
+
+        <span>WELCOME BACK</span>
+
+        <h2>Login to SkillKamao</h2>
+
+        <p>
+          Enter your details to continue learning.
+        </p>
+
+      </div>
+
+
+      <div class="social-auth">
+
+        <button type="button">
+          <strong>G</strong>
+          Continue with Google
+        </button>
+
+        <button type="button">
+          <strong>f</strong>
+          Continue with Facebook
+        </button>
+
+      </div>
+
+
+      <div class="divider">
+        <span>OR</span>
+      </div>
+
+
+      <form
+        #loginForm="ngForm"
+        (ngSubmit)="login()">
+
+        <div class="form-group">
+
+          <label>Email Address</label>
+
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            placeholder="you@example.com"
+            autocomplete="email">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <div class="password-label">
+
+            <label>Password</label>
+
+            <a href="#">
+              Forgot password?
+            </a>
+
+          </div>
+
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            placeholder="Enter your password"
+            autocomplete="current-password">
+
+        </div>
+
+
+        @if (errorMessage) {
+
+          <div class="form-message error">
+            {{ errorMessage }}
+          </div>
+
+        }
+
+
+        @if (successMessage) {
+
+          <div class="form-message success">
+            {{ successMessage }}
+          </div>
+
+        }
+
+
+        <label class="remember">
+
+          <input
+            type="checkbox"
+            name="rememberMe"
+            [(ngModel)]="rememberMe">
+
+          <span>
+            Remember me
+          </span>
+
+        </label>
+
+
+        <button
+          type="submit"
+          class="submit-button">
+
+          Login →
+
+        </button>
+
+      </form>
+
+
+      <p class="auth-switch">
+
+        Don't have an account?
+
+        <a routerLink="/signup">
+          Create Account
+        </a>
+
+      </p>
+
+    </div>
+
+  </section>
+
+</div>

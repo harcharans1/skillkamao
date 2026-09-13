@@ -1,0 +1,60 @@
+<section class="courses-page">
+
+    <div class="courses-header">
+        <p>LEARN & GROW</p>
+
+        <h1>Explore Our Courses</h1>
+
+        <span>
+            Learn practical skills through simple,
+            project-based courses.
+        </span>
+    </div>
+
+    <div class="courses-grid">
+
+        @for (course of courses(); track course.name) {
+
+        <div class="course-card">
+
+            <div class="course-image">
+                {{ course.icon }}
+            </div>
+
+            <div class="course-content">
+
+                <span class="level">
+                    {{ course.level }}
+                </span>
+
+                <h2>
+                    {{ course.name }}
+                </h2>
+
+                <p>
+                    {{ course.description }}
+                </p>
+
+                <div class="course-meta">
+                    <span>
+                        4 Lessons
+                    </span>
+
+                    <span>
+                        ⭐ {{ course.rating }}
+                    </span>
+                </div>
+
+                <button [routerLink]="['/course-details', course.name]">
+                    Start Learning →
+                </button>
+
+            </div>
+
+        </div>
+
+        }
+
+    </div>
+
+</section>
